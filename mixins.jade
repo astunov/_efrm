@@ -1,0 +1,50 @@
+mixin headers(data)
+    each item, index in data
+        if index === 0
+          | {{IF "(language STRING_EQ '!{item.lang}')"}}
+          | #{item.header}
+        else if (index === data.length - 1)
+          | {{ELSE }}
+          | #{item.header}
+        else
+          | {{ELSIF "(language STRING_EQ '!{item.lang}')"}}
+          | #{item.header}
+    | {{ENDIF}}
+    | <br><br>
+
+mixin ifElse(item)
+  if item.condition === 'if'
+    | {{IF "(language STRING_EQ '!{item.lang}')"}}
+  else if item.condition === 'elseif'
+    | {{ELSIF "(language STRING_EQ '!{item.lang}')"}}
+  else
+    | {{ELSE }}
+
+mixin hr
+  table(width="100%"  cellpadding="0" cellspacing="0" border="0" align="center" class="hr")
+   tr
+     td: div &nbsp;
+
+mixin h1(prop_item)
+  tr
+    td(align="center" ).h1: div
+      block
+
+mixin h2(prop_item)
+  tr
+    td(align="#{(prop_item.rtl) ? 'right' : 'left'}" ).h2: div
+      block
+mixin text(prop_item)
+  tr
+   td(align="#{(prop_item.rtl) ? 'right' : 'left'}").text: div
+     block
+mixin btn(prop)
+  table.button
+    tr
+      td.button-inner(valign="middle" align="center"): div
+        a(href="#{prop.link}" target="_blank" title="#{prop.title}").button-link: span !{prop.title}
+
+mixin banner(prop)
+  table.banner(width="100%")
+    tr
+      td.img-responsive(align="center" valign="top"): a(href="#{prop.link}" target="_blank" title="#{prop.title}"): img(src="#{prop.src}" alt="#{prop.title}" width="#{prop.width}" height="#{prop.height}")
