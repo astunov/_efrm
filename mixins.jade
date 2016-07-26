@@ -93,7 +93,7 @@ mixin footer(prop_item)
     tr
       td(style="padding-top:25px; font-size:0px;") &nbsp;
     tr
-      td !{prop_item.footerFirst}
+      td !{prop_item.footerFirst} <br><br>
     tr
       td(style="") !{replaceUtmInFooter(prop_item.footerSecond, date, prop_item.lang)}
 
@@ -109,7 +109,7 @@ mixin login(prop_item)
        <![endif]-->
        table(width="100%" cellpadding="0" cellspacing="0" border="0" align="center" style="")
          tr
-           td(valign="middle" align="#{(prop_item.rtl1) ? 'right' : 'left'}" width="61" style="border: 2px solid white;").logo
+           td(valign="middle" align="#{(prop_item.rtl1) ? 'right' : 'left'}" width="61" style="border: 2px solid white; font-size:0").logo
              a(href="#{prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}" target="_blank"): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/2732.png" alt="FBS" width="63" height="61")
            td(valign="middle" align="#{(prop_item.rtl1) ? 'left' : 'right'}" )
              table.button.button--wide(style="margin:0;"  cellpadding="0" cellspacing="0" border="0")
@@ -190,8 +190,8 @@ mixin startBanner(prop_item, topBanner)
       td.fluid
         table(width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;" dir="#{(prop_item.rtl1) ? 'rtl' : 'ltr'}")
           tr
-            td.img-responsive(align="left" valign="top" style="border-top: 6px solid #65a33e;"): a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank"): img(src="#{topBanner.left}", alt="FBS" width="300" height="#{(topBanner.height) ? height : '250'}")
-            td.img-responsive(align="left" valign="top" style="border-top: 6px solid #65a33e;"): a(href="#{'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'header', 'button', 'payments', prop_item.lang)}" target="_blank" title="Personal Area"): img(src="#{topBanner.right}", alt="Personal Area" width="300" height="#{(topBanner.height) ? topBanner.height : '250'}")
+            td(align="left" valign="top" style="border-top: 6px solid #65a33e;"): a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank"): img(src="#{topBanner.left}", alt="FBS" width="300" height="#{(topBanner.height) ? height : '250'}")
+            td(align="left" valign="top" style="border-top: 6px solid #65a33e;"): a(href="#{'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'header', 'button', 'payments', prop_item.lang)}" target="_blank" title="Personal Area"): img(src="#{topBanner.right}", alt="Personal Area" width="300" height="#{(topBanner.height) ? topBanner.height : '250'}")
 
 
 mixin ifelse(prop_item, index, prop)
