@@ -3,19 +3,18 @@
    * @func add utm nail to link
    */
   function utm(date, task, place, source, where, lang, sender) {
-    var sender;
     if (lang == undefined) {
       var lang = prop_item.lang;
     }
-    sender = (GR) ? 'gr360' : 'ems';
+    // sender = (GR) ? 'gr360' : 'ems';
     // console.log(prop_item.lang);
     // if (GR) {
-    //   var utm = '?utm_source=fbs-' + sender +'&utm_medium=email&utm_content=newsletter_' + date + '2016' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+      // var utm = '?utm_source=fbs-' + 'gr360' +'&utm_medium=email&utm_content=newsletter_' + date + '2016' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     // }
-    // if (EMS) {
-      (LETTERNAME) ? LETTERNAME : '';
-      var utm = '?utm_source=fbs-' + sender +'&utm_medium=email&utm_content=triger' + LETTERNAME + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
-    // }
+    // // if (EMS) {
+    //   (LETTERNAME) ? LETTERNAME : '';
+      var utm = '?utm_source=fbs-' + 'ems' +'&utm_medium=email&utm_content=triger' + '_tshirt2016' + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+    // // }
     (lang === 'ru') ?  utm += '&lang=ru' : false;
 
     return utm;
@@ -60,8 +59,8 @@
   function replaceUtmInFooter(data, date, lang) {
     // var footerIndexUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=newsletter_' + date + '2016' + '_' + task + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
     // var footerPaymentsUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=newsletter_' + date + '2016' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
-    var footerIndexUtm = '?utm_source=fbs-ems&utm_medium=email&utm_content=triger' + '_' + task + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
-    var footerPaymentsUtm = '?utm_source=fbs-ems&utm_medium=email&utm_content=triger' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
+    var footerIndexUtm = '?utm_source=fbs-ems&utm_medium=email&utm_content=triger' + '_tshirt2016' + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
+    var footerPaymentsUtm = '?utm_source=fbs-ems&utm_medium=email&utm_content=triger' + '_tshirt2016' + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
     var formatedData;
     formatedData = data.replace('?utm_replace_index', footerIndexUtm);
     formatedData = formatedData.replace('?utm_replace_payments', footerPaymentsUtm);
@@ -267,4 +266,5 @@
   var pt_en = queryData(['pt', 'en'], dataN);
   var th_en = queryData(['th', 'en'], dataN);
   var th_id_en = queryData(['th', 'id', 'en'], dataN);
+  var ms_en = queryData(['ms', 'en'], dataN);
 
