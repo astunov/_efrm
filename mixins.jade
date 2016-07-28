@@ -64,13 +64,13 @@ mixin h1(prop_item, align)
     td(align="#{align}" ).h1: div
       block
 
-mixin h2(prop_item)
+mixin h2(prop_item, style)
   tr
-    td(align="#{(prop_item.rtl) ? 'right' : 'left'}" ).h2: div
+    td(align="#{(prop_item.rtl) ? 'right' : 'left'}" style=style).h2: div
       block
-mixin text(prop_item)
+mixin text(prop_item, style)
   tr
-   td(align="#{(prop_item.rtl) ? 'right' : 'left'}").text: div
+   td(align="#{(prop_item.rtl) ? 'right' : 'left'}" style=style).text: div
      block
 
 mixin btn(prop, styleProp)
@@ -185,7 +185,6 @@ mixin preheader(prop_item)
       div(style="display:none;font-size:1px;color:#000000;line-height:0px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;") !{prop_item.preheader}
 mixin startBanner(prop_item, topBanner, type)
 
-  - console.log(type)
   -
     var typeMap =
       {
@@ -194,7 +193,7 @@ mixin startBanner(prop_item, topBanner, type)
         "promo": "#457a93",
         "news": "#a77d3b"
       }
-      var borderColor = ((type !== undefined) && (typeMap.hasOwnProperty(type))) ? typeMap[type] : typeMap.trans;
+      var borderColor = (typeMap.hasOwnProperty(type)) ? typeMap[type] : typeMap.trans;
 
   if topBanner
     //BANNER
