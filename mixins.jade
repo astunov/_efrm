@@ -73,11 +73,12 @@ mixin text(prop_item, style)
    td(align="#{(prop_item.rtl) ? 'right' : 'left'}" style=style).text: div
      block
 
-mixin btn(prop, styleProp)
-  - var style =  (styleProp) ? styleProp : 'padding-bottom:20px;'
+mixin btn(prop, styleProp, styleTb)
+  - style =  (styleProp) ? styleProp : 'padding-bottom:20px;'
+  - styleTb = (styleTb) ? styleTb : "margin: auto;"
   tr
-    td.button-wrapper(align="center" style=style)
-      table.button
+    td.button-wrapper(align="" style=style)
+      table.button(align="" style=styleTb)
         tr
           td.button-inner(valign="middle" align="center"): div
             a(href="#{prop.link}" target="_blank" title="#{prop.title}").button-link: span !{prop.title}
@@ -184,7 +185,6 @@ mixin preheader(prop_item)
     td(align="center" style="padding-top:0px;")
       div(style="display:none;font-size:1px;color:#000000;line-height:0px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;") !{prop_item.preheader}
 mixin startBanner(prop_item, topBanner, type)
-
   -
     var typeMap =
       {
@@ -193,13 +193,18 @@ mixin startBanner(prop_item, topBanner, type)
         "promo": "#457a93",
         "news": "#a77d3b"
       }
-      var borderColor = (typeMap.hasOwnProperty(type)) ? typeMap[type] : typeMap.trans;
+      var borderColor;
+      if (EMS) {
+        borderColor = typeMap.trig;
+      } else {
+        borderColor = (typeMap.hasOwnProperty(type)) ? typeMap[type] : typeMap.trans;
+      }
 
   if topBanner
     //BANNER
     tr
       td.fluid
-        table(width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;" dir="#{(prop_item.rtl1) ? 'rtl' : 'ltr'}")
+        table(width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; font-size: 0;")
           tr
             td(align="left" valign="top" style="border-top: 6px solid #{borderColor};"): a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank"): img(src="#{topBanner.left}", alt="FBS" width="300" height="#{(topBanner.height) ? height : '250'}")
             td(align="left" valign="top" style="border-top: 6px solid #{borderColor};"): a(href="#{'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'header', 'button', 'payments', prop_item.lang)}" target="_blank" title="Personal Area"): img(src="#{topBanner.right}", alt="Personal Area" width="300" height="#{(topBanner.height) ? topBanner.height : '250'}")
