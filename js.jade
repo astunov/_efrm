@@ -63,12 +63,18 @@
       var footerIndexUtm = '?utm_source=fbs-ems&utm_medium=email&utm_content=triger' + '_' + LETTERNAME + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
       var footerPaymentsUtm = '?utm_source=fbs-ems&utm_medium=email&utm_content=triger' + '_' + LETTERNAME + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
     }
-    console.log(footerIndexUtm, '\n', footerPaymentsUtm)
     var formatedData;
     formatedData = data.replace('?utm_replace_index', footerIndexUtm);
     formatedData = formatedData.replace('?utm_replace_payments', footerPaymentsUtm);
+    if (EMS) {
+      formatedData = formatedData.replace('[[remove]]', 'http://s.fbs.direct/u/un.php?par=$uid$_518803_$llid$_1')
+    }
+    console.log(footerIndexUtm, '\n', footerPaymentsUtm)
+    console.log(formatedData)
     return formatedData;
   }
+
+
 
   /**
    * @func add one link in to p of text
