@@ -55,38 +55,40 @@ mixin hr(prop_item)
     tr
       td: div &nbsp;
 
-mixin h1(prop_item, align)
-  if align !== undefined
-    - align = (prop_item.rtl) ? 'right' : 'left'
-  else
-     - align = 'center'
+mixin h1(prop_item, props)
+  - props = props || {"class": "h1", "align": "left"}
   tr
-    td(align="#{align}" ).h1: div
+    td&attributes(props): div
       block
 
-mixin h2(prop_item, style)
+mixin h2(prop_item, props)
+  - props = props || {"class": "h2", "align": (prop_item.rtl) ? 'right' : 'left'}
   tr
-    td(align="#{(prop_item.rtl) ? 'right' : 'left'}" style=style).h2: div
+    td&attributes(props): div
       block
-mixin text(prop_item, style)
+
+mixin text(prop_item, props)
+  //- -console.log(prop_item)
+  - props = props || {"class": "text", "align": (prop_item.rtl) ? 'right' : 'left'}
   tr
-   td(align="#{(prop_item.rtl) ? 'right' : 'left'}" style=style).text: div
+   td&attributes(props): div
      block
 
 mixin btn(prop, styleProp, styleTb)
   - style =  (styleProp) ? styleProp : 'padding-bottom:20px;'
   - styleTb = (styleTb) ? styleTb : "margin: auto;"
   tr
-    td.button-wrapper(align="" style=style)
-      table.button(align="" style=styleTb)
+    td.button-wrapper&attributes(style)
+      table.button&attributes(styleTb)
         tr
           td.button-inner(valign="middle" align="center"): div
             a(href="#{prop.link}" target="_blank" title="#{prop.title}").button-link: span !{prop.title}
 
 mixin banner(prop)
-  table.banner(width="100%")
+  -
+  +table({"class":"banner", "width": "100%"})
     tr
-      td.img-responsive(align="center" valign="top"): a(href="#{prop.link}" target="_blank" title="#{prop.title}"): img(src="#{prop.src}" alt="#{prop.title}" width="#{prop.width}" height="#{prop.height}")
+      td.img-responsive(align="center" valign="top"): a(href="#{prop.link}" target="_blank"): img(src="#{prop.src}")
 
 
 mixin footer(prop_item)
@@ -211,12 +213,42 @@ mixin startBanner(prop_item, topBanner, type)
 
 
 mixin ifelse(prop_item, index, prop)
-  if index === 0
-    | {{IF "(language STRING_EQ '!{prop_item.lang}')"}}
-  else if (index === prop.length - 1)
-    | {{ELSE}}
-  else
-    | {{ELSIF "(language STRING_EQ '!{prop_item.lang}')"}}
+  if GR
+    if index === 0
+      | {{IF "(language STRING_EQ '!{prop_item.lang}')"}}
+    else if (index === prop.length - 1)
+      | {{ELSE}}
+    else
+      | {{ELSIF "(language STRING_EQ '!{prop_item.lang}')"}}
 
 
 
+
+
+//- NEW ERA
+
+//- ELEMENTS
+
+mixin table(attr)
+  - attr = attr || {}
+  table(cellpadding="0" cellspacing="0" border="0")&attributes(attr)
+    block
+mixin a(attr)
+  - attr = attr || {}
+  a(target="_blank")&attributes(attr)
+    block
+
+mixin bg(img, attr)
+  -
+    attr = attr || ''
+  td(style="background: #ebebeb url(#{img.src}) center bottom no-repeat;")&attributes(attr)
+    <!--[if gte mso 9]>
+    | <v:rect style="width:#{(img.width || '600') + 'px'}; height:#{img.height + 'px' || ''};" strokecolor="none">
+    |  <v:fill type="tile" color="#fff" src="#{img.src}" /></v:fill>
+    | </v:rect>
+    | <v:shape id="lolid" style="position:absolute; width:#{(img.width || '600') + 'px'}; height:#{img.height + 'px' || ''};">
+    <![endif]-->
+    block
+    <!--[if gte mso 9]>
+    | </v:shape>
+    <![endif]-->
