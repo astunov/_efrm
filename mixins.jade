@@ -56,7 +56,10 @@ mixin hr(prop_item)
       td: div &nbsp;
 
 mixin h1(prop_item, props)
-  - props = props || {"class": "h1", "align": (prop_item.rtl) ? 'right' : 'left'}
+  -
+    props = props || {}
+    props.class = props.class || "h1"
+    props.align = props.align || (prop_item.rtl) ? 'right' : 'left'
   tr
     td&attributes(props): div
       block
@@ -88,7 +91,7 @@ mixin banner(prop)
   -
   +table({"class":"banner", "width": "100%"})
     tr
-      td.img-responsive(align="center" valign="top"): a(href="#{prop.link}" target="_blank"): img(src="#{prop.src}")
+      td.img-responsive(align="center" valign="top"): a(href="#{prop.link}" target="_blank"): img(src="#{prop.src}" style="padding-bottom: 0;")
 
 
 mixin footer(prop_item)
