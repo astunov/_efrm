@@ -88,10 +88,8 @@ mixin btn(prop, styleProp, styleTb)
             a(href="#{prop.link}" target="_blank" title="#{prop.title}").button-link: span !{prop.title}
 
 mixin banner(prop)
-  -
-  +table({"class":"banner", "width": "100%"})
-    tr
-      td.img-responsive(align="center" valign="top"): a(href="#{prop.link}" target="_blank"): img(src="#{prop.src}" style="padding-bottom: 0;")
+  tr
+    td.fluid(align="center" valign="top"): a(href="#{prop.link}" target="_blank"): img(src="#{prop.src}" style="padding-bottom: 0;")
 
 
 mixin footer(prop_item)
@@ -270,3 +268,12 @@ mixin ol(data)
               else if number === 2
                 img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3797.png" alt="3" width="17" height="23")
             td.text(valign="middle"): div !{item}
+
+mixin footerBye(prop_item, item)
+
+  tr
+    td(style="padding-top:10px;")
+      table(cellpadding="0" cellspacing="0" border="0" align="#{(prop_item.rtl) ? 'right' : 'left'}")
+        tr
+          td: a(href="#{prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}"): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3792.png", alt="" width="25" height="25")
+          td(style="font-size: 10px;  color: #696969; padding-left:10px; padding-right:10px; "): div !{item}
