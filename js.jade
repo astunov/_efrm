@@ -13,7 +13,7 @@ include data-template
       LETTERNAME = LETTERNAME || task ;
       var utm = '?utm_source=fbs-' + 'ems' +'&utm_medium=email&utm_content=triger' + '_' + LETTERNAME + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     }
-    utm += ((lang === 'ru') || (lang === 'my')) ?   '&lang=' + lang : '';
+    utm += ((lang === 'ru') || (lang === 'xx')) ?   '&lang=' + lang : '';
     // debug mode
     // console.log(utm)
     return utm;

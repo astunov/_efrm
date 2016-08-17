@@ -231,7 +231,9 @@ mixin ifelse(prop_item, index, prop)
 //- ELEMENTS
 
 mixin table(attr)
-  - attr = attr || {}
+  -
+    attr = attr || {}
+    attr.width = attr.width || '100%'
   table(cellpadding="0" cellspacing="0" border="0")&attributes(attr)
     block
 mixin a(attr)
