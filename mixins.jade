@@ -71,8 +71,9 @@ mixin h2(prop_item, props)
       block
 
 mixin text(prop_item, props)
-  //- -console.log(prop_item)
-  - props = props || {"class": "text", "align": (prop_item.rtl) ? 'right' : 'left'}
+  - props = props || {}
+  - props.class = props.class || 'text'
+  - props.align = props.align ||  (prop_item.rtl) ? 'right' : 'left'
   tr
    td&attributes(props): div
      block

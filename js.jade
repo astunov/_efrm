@@ -43,13 +43,14 @@ include data-template
   /**
    * @func get site.com instead income https://site.com
    */
-  String.prototype.my = function () {
+  String.prototype.my = function (link) {
+    link = link || ''
     var dataFormated = this.replace('https:\/\/', '');
     var patt = new RegExp('\/$');
     if (patt.test(dataFormated)) {
       dataFormated = dataFormated.replace(/\/$/, '');
     }
-    return "https://my." + dataFormated;
+    return "https://my." + dataFormated + link;
   };
 
   /**
