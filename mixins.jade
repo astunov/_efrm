@@ -46,8 +46,13 @@ mixin headers(data)
       | {{ENDIF}}
       | <br><br>
 
+mixin headersOnly(data)
 
-
+    if data[0].header
+      each item, index in data
+        div #{item.lang} <br>
+        | #{item.header}
+      | <br><br>
 
 
 mixin hr(prop_item)
@@ -79,8 +84,13 @@ mixin text(prop_item, props)
      block
 
 mixin btn(prop, styleProp, styleTb)
-  - style =  (styleProp) ? styleProp : {"style": "padding-bottom:20px;"}
-  - styleTb = (styleTb) ? styleTb :  {"style": "margin:auto;"}
+  -
+    style =  (styleProp) || {};
+    style.style  = style.style || "padding-bottom:20px;"
+    style.align = style.align  || "center"
+    styleTb = styleTb || {};
+    styleTb.style = styleTb.style || "margin:auto;"
+    styleTb.align = styleTb.align || "center";
   tr
     td.button-wrapper&attributes(style)
       table.button&attributes(styleTb)
@@ -244,8 +254,12 @@ mixin a(attr)
 
 mixin bg(img, attr)
   -
-    attr = attr || ''
-  td(style="background: #ebebeb url(#{img.src}) center bottom no-repeat;")&attributes(attr)
+    img = img || ''
+    img.color = img.color || '#fff'
+    img.height = img.height || '200'
+    img.src = img.src || ''
+    attr = attr || {}
+  td(style="background: #{img.color} url(#{img.src}) center bottom no-repeat; padding-left:0; padding-right:0;")&attributes(attr)
     <!--[if gte mso 9]>
     | <v:rect style="width:#{(img.width || '600') + 'px'}; height:#{img.height + 'px' || ''};" strokecolor="none">
     |  <v:fill type="tile" color="#fff" src="#{img.src}" /></v:fill>
@@ -272,11 +286,11 @@ mixin ol(data)
                 img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3797.png" alt="3" width="17" height="23")
             td.text(valign="middle"): div !{item}
 
-mixin footerBye(prop_item, item)
-
+mixin footerBye(prop_item, item, align)
+  - align = align || ((prop_item.rtl) ? 'right' : 'left')
   tr
     td(style="padding-top:10px;")
-      table(cellpadding="0" cellspacing="0" border="0" align="#{(prop_item.rtl) ? 'right' : 'left'}")
+      table(cellpadding="0" cellspacing="0" border="0" align=align)
         tr
-          td: a(href="#{prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}"): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3792.png", alt="" width="25" height="25")
-          td(style="font-size: 10px;  color: #696969; padding-left:10px; padding-right:10px; "): div !{item}
+          td(valign="middle"): a(href="#{prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}" style="font-size:0;"): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3792.png", alt="" width="25" height="25" style="display:block;")
+          td.footerBye__text(style="font-size: 10px;  color: #696969; padding-left:10px; padding-right:10px; "): div !{item}
