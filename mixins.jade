@@ -64,13 +64,17 @@ mixin h1(prop_item, props)
   -
     props = props || {}
     props.class = props.class || "h1"
-    props.align = props.align || (prop_item.rtl) ? 'right' : 'left'
+    props.align = props.align || ((prop_item.rtl) ? 'right' : 'left')
   tr
     td&attributes(props): div
       block
 
 mixin h2(prop_item, props)
-  - props = props || {"class": "h2", "align": (prop_item.rtl) ? 'right' : 'left'}
+  -
+    props = props || {}
+    props.class = props.class || "h2"
+    props.align = props.align || ((prop_item.rtl) ? 'right' : 'left')
+
   tr
     td&attributes(props): div
       block
@@ -108,21 +112,21 @@ mixin footer(prop_item)
     tr
       td(style="padding-top:25px; font-size:0px;") &nbsp;
     tr
-      td !{prop_item.footerFirst} <br><br>
+      td(align="#{(prop_item.rtl) ? 'right' : 'left'}") !{prop_item.footerFirst} <br><br>
     tr
-      td(style="") !{replaceUtmInFooter(prop_item.footerSecond, date, prop_item.lang)}
+      td(align="#{(prop_item.rtl) ? 'right' : 'left'}") !{replaceUtmInFooter(prop_item.footerSecond, date, prop_item.lang)}
 
 mixin login(prop_item)
   table(width="600" cellpadding="0" cellspacing="0" border="0" align="center" id="loginTable" dir="#{(prop_item.rtl1) ? 'rtl' : 'ltr'}" style="background: #65a33e url(http://multimedia.email.fbs.com/fbs/1/1/photos/3667.jpg) no-repeat center center;")
    tr
-     td.fluid(style="padding-left: 60px; padding-right: 60px; background: #f2f2f2 url(http://multimedia.email.fbs.com/fbs/1/1/photos/3667.jpg) no-repeat center center;")
+     td.fluid(style="background: #f2f2f2 url(http://multimedia.email.fbs.com/fbs/1/1/photos/3667.jpg) no-repeat center center;")
        <!--[if gte mso 9]>
        | <v:rect style="width:600px;height:80px;" strokecolor="none">
        |   <v:fill type="tile" color="#65a33e" src="http://multimedia.email.fbs.com/fbs/1/1/photos/3667.jpg" /></v:fill>
        | </v:rect>
        | <v:shape id="NameHere" style="position:absolute;width:600px;height:80px;">
        <![endif]-->
-       table(width="100%" cellpadding="0" cellspacing="0" border="0" align="center" style="")
+       table(width="480" cellpadding="0" cellspacing="0" border="0" align="center" style="")
          tr
            td(valign="middle" align="#{(prop_item.rtl1) ? 'right' : 'left'}" width="61" style="border: 2px solid white; font-size:0").logo
              a(href="#{prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}" target="_blank"): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/2732.png" alt="FBS" width="63" height="61")
@@ -135,6 +139,18 @@ mixin login(prop_item)
        <!--[if gte mso 9]>
        | </v:shape>
        <![endif]-->
+
+mixin loginAlter(prop_item)
+  table(width="600" cellpadding="0" cellspacing="0" border="0" align="center" id="loginTable" dir="#{(prop_item.rtl1) ? 'rtl' : 'ltr'}")
+   tr
+     td(align="right" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0;")
+      +a({href: prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3944.png" width="300" height="80" alt="go to site" style="display:block")
+     td(align="left" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0;")
+      +a({href: 'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'footer', 'button', 'payments', prop_item.lang)}): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3945.png" width="300" height="80" alt="go to personal area" style="display:block")
+
+
+
+
 mixin gmailHack()
   | <!-- Gmail hack -->
   | <div style="display:none; white-space:nowrap; font:15px courier; color:#ffffff; line-height:0; width:600px !important; min-width:600px !important; max-width:600px !important;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
@@ -220,8 +236,8 @@ mixin startBanner(prop_item, topBanner, type)
       td.fluid
         table(width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; font-size: 0;" dir="ltr")
           tr
-            td(align="left" valign="top" style="border-top: 6px solid #{borderColor};"): a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank"): img(src="#{topBanner.left}", alt="FBS" width="300" height="#{(topBanner.height) ? height : '250'}")
-            td(align="left" valign="top" style="border-top: 6px solid #{borderColor};"): a(href="#{'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'header', 'button', 'payments', prop_item.lang)}" target="_blank" title="Personal Area"): img(src="#{topBanner.right}", alt="Personal Area" width="300" height="#{(topBanner.height) ? topBanner.height : '250'}")
+            td(align="left" valign="top" style="border-top: 6px solid #{borderColor};"): a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank"): img(src="#{topBanner.left}", alt="FBS" width="300" height="#{(topBanner.height) ? height : '250'}" style="border: none;")
+            td(align="left" valign="top" style="border-top: 6px solid #{borderColor};"): a(href="#{'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'header', 'button', 'payments', prop_item.lang)}" target="_blank" title="Personal Area"): img(src="#{topBanner.right}", alt="Personal Area" width="300" height="#{(topBanner.height) ? topBanner.height : '250'}" style="border: none;")
 
 
 mixin ifelse(prop_item, index, prop)
@@ -293,4 +309,4 @@ mixin footerBye(prop_item, item, align)
       table(cellpadding="0" cellspacing="0" border="0" align=align)
         tr
           td(valign="middle"): a(href="#{prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}" style="font-size:0;"): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3792.png", alt="" width="25" height="25" style="display:block;")
-          td.footerBye__text(style="font-size: 10px;  color: #696969; padding-left:10px; padding-right:10px; "): div !{item}
+          td.footerBye__text(style="font-size: 10px;  color: #696969; padding-left:10px; padding-right:10px; font-family: Arial, sans-serif"): div !{item}
