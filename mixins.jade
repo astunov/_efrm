@@ -140,13 +140,13 @@ mixin login(prop_item)
        | </v:shape>
        <![endif]-->
 
-mixin loginAlter(prop_item)
+mixin loginAlter(prop_item, ems)
   table(width="600" cellpadding="0" cellspacing="0" border="0" align="center" id="loginTable" dir="#{(prop_item.rtl1) ? 'rtl' : 'ltr'}")
    tr
      td(align="right" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0;")
-      +a({href: prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3944.png" width="300" height="80" alt="go to site" style="display:block")
+      +a({href: prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}): img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_left.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3944.png'}" width="300" height="80" alt="go to site" style="display:block")
      td(align="left" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0;")
-      +a({href: 'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'footer', 'button', 'payments', prop_item.lang)}): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3945.png" width="300" height="80" alt="go to personal area" style="display:block")
+      +a({href: 'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'footer', 'button', 'payments', prop_item.lang)}): img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_right.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3945.png'}" width="300" height="80" alt="go to personal area" style="display:block")
 
 
 
@@ -308,5 +308,5 @@ mixin footerBye(prop_item, item, align)
     td(style="padding-top:10px;")
       table(cellpadding="0" cellspacing="0" border="0" align=align)
         tr
-          td(valign="middle"): a(href="#{prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}" style="font-size:0;"): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3792.png", alt="" width="25" height="25" style="display:block;")
+          td(valign="middle"): a(href="#{prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}" style="font-size:0;" target="_blank"): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3792.png", alt="" width="25" height="25" style="display:block;")
           td.footerBye__text(style="font-size: 10px;  color: #696969; padding-left:10px; padding-right:10px; font-family: Arial, sans-serif"): div !{item}
