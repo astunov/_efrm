@@ -8,10 +8,11 @@ include data-template
       var lang = prop_item.lang;
     }
     if (GR) {
-      var utm = '?utm_source=fbs-gr360' +'&utm_medium=email&utm_content=newsletter_' + date + '2016' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+      var utm = '?utm_source=fbs-gr360' +'&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     } else if (EMS) {
       LETTERNAME = LETTERNAME || task ;
-      var utm = '?utm_source=fbs-eMS' +'&utm_medium=email&utm_content=triger' + '_' + LETTERNAME + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+      type = type || 'trigger'
+      var utm = '?utm_source=fbs-eMS' +'&utm_medium=email&utm_content=' + type + '_' + LETTERNAME + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     }
     utm += ((lang === 'ru') || (lang === 'xx')) ?   '&lang=' + lang : '';
     // debug mode
@@ -71,10 +72,11 @@ include data-template
    */
   function replaceUtmInFooter(data, date, lang) {
     if (GR) {
-      var footerIndexUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=newsletter_' + date + '2016' + '_' + task + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
-      var footerPaymentsUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=newsletter_' + date + '2016' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
+      var footerIndexUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
+      var footerPaymentsUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
     } else if (EMS) {
-      LETTERNAME = LETTERNAME || task ;
+      LETTERNAME = LETTERNAME || task;
+      type = type || 'trigger'
       var footerIndexUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=triger' + '_' + LETTERNAME + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
       var footerPaymentsUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=triger' + '_' + LETTERNAME + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
     }
@@ -86,8 +88,6 @@ include data-template
     if (EMS) {
       formatedData = formatedData.replace('[[remove]]', 'http://s.fbs.direct/u/un.php?par=$uid$_518803_$llid$_1')
     }
-    // console.log(footerIndexUtm, '\n', footerPaymentsUtm)
-    // console.log(formatedData)
     return formatedData;
   }
 
@@ -161,7 +161,7 @@ include data-template
   var la_th =  queryData(['lo', 'th'], dataOutput);
   var la_th_my =  queryData(['lo', 'th', 'my'], dataOutput);
   var ar_ur_bn = queryData(['ar', 'ur', 'bn'], dataOutput);
-  var cn_ja_ko = queryData(['cn', 'ja', 'ko'], dataOutput);
+  var cn_jp_ko = queryData(['cn', 'jp', 'ko'], dataOutput);
   var es_pt_en = queryData(['es', 'pt', 'en'], dataOutput);
   var ta_vi_ms = queryData(['ta', 'vi', 'ms'], dataOutput);
   var id_ru = queryData(['id', 'ru'], dataOutput);
@@ -188,7 +188,7 @@ include data-template
   var cn = queryData(['cn'], dataOutput);
   var es = queryData(['es'], dataOutput);
   var id = queryData(['id'], dataOutput);
-  var ja = queryData(['ja'], dataOutput);
+  var jp = queryData(['jp'], dataOutput);
   var ko = queryData(['ko'], dataOutput);
   var lo = queryData(['lo'], dataOutput);
   var ms = queryData(['ms'], dataOutput);
