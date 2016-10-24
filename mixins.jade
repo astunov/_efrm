@@ -160,7 +160,7 @@ mixin loginAlter(prop_item, ems)
         img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_left.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3944.png'}" alt="FBS" style="display:block; width: 100%; font-size:16px;")
      td(align="left" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0; background-color: #70a839;" width="50%")
       +a({href: 'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'footer', 'button', 'payments', prop_item.lang)})
-        img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_right.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3945.png'}" alt="Personal Area" style="display:block; width: 100%; color: #fff; backgground-color: #70A839;  font-size:16px;")
+        img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_right.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3945.png'}" alt="Personal Area" style="display:block; width: 100%; color: #fff; background-color: #70A839;  font-size:16px;")
 
 
 
@@ -223,7 +223,7 @@ mixin step(number, even)
 mixin preheader(prop_item)
   // PREHEADER
   tr
-    td(align="center" style="padding-top:0px;")
+    td(align="center" style="padding-top:0px;" )
       div(style="display:none;font-size:1px;color:#000000;line-height:0px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;") !{prop_item.preheader}
 mixin startBanner(prop_item, topBanner, type)
   -
@@ -245,9 +245,9 @@ mixin startBanner(prop_item, topBanner, type)
     //BANNER
     tr
       td.fluid
-        table(width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; margin: 0 auto; table-layout: fixed; background-color: #ffffff;" dir="ltr")
+        table(width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; margin: 0 auto; table-layout: fixed; background-color: #ffffff;" )
           tr
-            td(align="left" valign="top" style="border-top: 6px solid #{borderColor};" width="50%")
+            td(align="right" valign="top" style="border-top: 6px solid #{borderColor};" width="50%")
               a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank")
                 img(src="#{topBanner.left}", alt="FBS" style="border: none; display:block; height: auto; width: 100%;")
             td(align="left" valign="top" style="border-top: 6px solid #{borderColor}; " width="50%")
