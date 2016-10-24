@@ -56,7 +56,7 @@ mixin headersOnly(data)
 
 
 mixin hr(prop_item)
-  table(width="100%"  cellpadding="0" cellspacing="0" border="0" align="left" class="hr")
+  table(width="100%"  cellpadding="0" cellspacing="0" border="0" align="center" class="hr")
     tr
       td: div &nbsp;
 
@@ -108,7 +108,7 @@ mixin banner(prop)
 
 
 mixin footer(prop_item)
-  table(width="600"  cellpadding="0" cellspacing="0" border="0" align="center" id="footerTable" dir="#{(prop_item.rtl) ? 'rtl' : 'ltr'}")
+  table(cellpadding="0" cellspacing="0" border="0" align="center" id="footerTable" dir="#{(prop_item.rtl) ? 'rtl' : 'ltr'}")
     tr
       td(style="padding-top:25px; font-size:0px;") &nbsp;
     tr
@@ -141,33 +141,24 @@ mixin login(prop_item)
        <![endif]-->
 
 mixin loginAlter(prop_item, ems)
-  table(width="600" cellpadding="0" cellspacing="0" border="0" align="center" id="loginTable" dir="#{(prop_item.rtl1) ? 'rtl' : 'ltr'}")
+  table(width="100%" cellpadding="0" cellspacing="0" border="0" align="center" id="loginTable" dir="#{(prop_item.rtl1) ? 'rtl' : 'ltr'}" style="max-width:600px; margin: 0 auto; ")
    tr
-     td(align="right" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0;")
-      +a({href: prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}): img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_left.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3944.png'}" width="300" height="80" alt="go to site" style="display:block")
-     td(align="left" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0;")
-      +a({href: 'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'footer', 'button', 'payments', prop_item.lang)}): img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_right.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3945.png'}" width="300" height="80" alt="go to personal area" style="display:block")
+     td(align="right" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0;" width="50%")
+      +a({href: prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)})
+        img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_left.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3944.png'}" alt="FBS" style="display:block; width: 100%; font-size:16px;")
+     td(align="left" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0; background-color: #70a839;" width="50%")
+      +a({href: 'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'footer', 'button', 'payments', prop_item.lang)})
+        img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_right.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3945.png'}" alt="Personal Area" style="display:block; width: 100%; color: #fff; backgground-color: #70A839;  font-size:16px;")
 
 
 
 
-mixin gmailHack()
-  | <!-- Gmail hack -->
-  | <div style="display:none; white-space:nowrap; font:15px courier; color:#ffffff; line-height:0; width:600px !important; min-width:600px !important; max-width:600px !important;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
-  | <!-- /Gmail hack -->
-
-mixin startLetter()
-  table(cellpadding="0" cellspacing="0" border="0" align="center" id="backgroundTable" )
-    tr
-      td
-        center
-          div(align="center").wrapper
-            block
 
 mixin head()
   meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
-  meta(name="viewport" content="width=600, initial-scale=1")
-  //- meta( name="viewport" content="width=600, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no")
+  meta(http-equiv="X-UA-Compatible" content="IE=edge")
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+
   meta(meta name="format-detection" content="telephone=no")
 
   link(rel="stylesheet", href="style/style.css")
@@ -189,6 +180,14 @@ mixin head()
         padding: 0;
     }
     v\:* { behavior: url(#default#VML); display: inline-block; }
+
+    @media (max-width:620px) {
+      .contentTb > tbody > tr > td:not(.fluid) {
+        padding-right: 20px !important;
+        padding-left: 20px !important;
+      }
+    }
+  |  <!--[if (gte mso 9)|(IE)]> <style type="text/css"> table {border-collapse: collapse;} </style> <![endif]-->
 
 mixin list(prop_item, title, content)
   tr
@@ -234,11 +233,14 @@ mixin startBanner(prop_item, topBanner, type)
     //BANNER
     tr
       td.fluid
-        table(width="600" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff; font-size: 0;" dir="ltr")
+        table(width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; margin: 0 auto; table-layout: fixed; background-color: #ffffff;" dir="ltr")
           tr
-            td(align="left" valign="top" style="border-top: 6px solid #{borderColor};"): a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank"): img(src="#{topBanner.left}", alt="FBS" width="300" height="#{(topBanner.height) ? height : '250'}" style="border: none;")
-            td(align="left" valign="top" style="border-top: 6px solid #{borderColor};"): a(href="#{'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'header', 'button', 'payments', prop_item.lang)}" target="_blank" title="Personal Area"): img(src="#{topBanner.right}", alt="Personal Area" width="300" height="#{(topBanner.height) ? topBanner.height : '250'}" style="border: none;")
-
+            td(align="left" valign="top" style="border-top: 6px solid #{borderColor};" width="50%")
+              a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank")
+                img(src="#{topBanner.left}", alt="FBS" style="border: none; display:block; height: auto; width: 100%;")
+            td(align="left" valign="top" style="border-top: 6px solid #{borderColor}; " width="50%")
+              a(href="#{'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'header', 'button', 'payments', prop_item.lang)}" target="_blank" title="Personal Area")
+                img(src="#{topBanner.right}", alt="Personal Area" style="border: none; display:block; height: auto; width: 100%;" )
 
 mixin ifelse(prop_item, index, prop)
   if GR
@@ -248,9 +250,6 @@ mixin ifelse(prop_item, index, prop)
       | {{ELSE}}
     else
       | {{ELSIF "(language STRING_EQ '!{prop_item.lang}')"}}
-
-
-
 
 
 //- NEW ERA
