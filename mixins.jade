@@ -116,6 +116,18 @@ mixin footer(prop_item)
     tr
       td(align="#{(prop_item.rtl) ? 'right' : 'left'}") !{replaceUtmInFooter(prop_item.footerSecond, date, prop_item.lang)}
 
+//- 141016
+//- New footer template
+mixin footer2(prop_item)
+  table(width="600"  cellpadding="0" cellspacing="0" border="0" align="center" id="footerTable" dir="#{(prop_item.rtl) ? 'rtl' : 'ltr'}")
+    tr
+      td(style="padding-top:25px; font-size:0px;") &nbsp;
+    tr
+      td(align="#{(prop_item.rtl) ? 'right' : 'left'}") !{prop_item.footerFirst} <br><br>
+    tr
+      td(align="#{(prop_item.rtl) ? 'right' : 'left'}") !{replaceUtmInFooter(prop_item.footerSecond, date, prop_item.lang)}
+
+
 mixin login(prop_item)
   table(width="600" cellpadding="0" cellspacing="0" border="0" align="center" id="loginTable" dir="#{(prop_item.rtl1) ? 'rtl' : 'ltr'}" style="background: #65a33e url(http://multimedia.email.fbs.com/fbs/1/1/photos/3667.jpg) no-repeat center center;")
    tr
@@ -223,11 +235,11 @@ mixin startBanner(prop_item, topBanner, type)
         "news": "#a77d3b"
       }
       var borderColor;
-      if (EMS) {
-        borderColor = typeMap.trig;
-      } else {
+      // if (EMS) {
+      //   // borderColor = typeMap.trig;
+      // } else {
         borderColor = (typeMap.hasOwnProperty(type)) ? typeMap[type] : typeMap.trans;
-      }
+      // }
 
   if topBanner
     //BANNER

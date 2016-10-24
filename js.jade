@@ -72,8 +72,8 @@ include data-template
    */
   function replaceUtmInFooter(data, date, lang) {
     if (GR) {
-      var footerIndexUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=newsletter_' + date + '2016' + '_' + task + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
-      var footerPaymentsUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=newsletter_' + date + '2016' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
+      var footerIndexUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
+      var footerPaymentsUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
     } else if (EMS) {
       LETTERNAME = LETTERNAME || task ;
       TYPE = TYPE || 'triger'
@@ -88,8 +88,6 @@ include data-template
     if (EMS) {
       formatedData = formatedData.replace('[[remove]]', 'http://s.fbs.direct/u/un.php?par=$uid$_518803_$llid$_1')
     }
-    // console.log(footerIndexUtm, '\n', footerPaymentsUtm)
-    // console.log(formatedData)
     return formatedData;
   }
 
