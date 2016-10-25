@@ -223,7 +223,7 @@ mixin step(number, even)
 mixin preheader(prop_item)
   // PREHEADER
   tr
-    td(align="center" style="padding-top:0px;" )
+    td(align="center" style="padding-top:0px;" dir="#{(prop_item.rtl) ? 'rtl' : 'ltr'}")
       div(style="display:none;font-size:1px;color:#000000;line-height:0px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;") !{prop_item.preheader}
 mixin startBanner(prop_item, topBanner, type)
   -
@@ -232,7 +232,8 @@ mixin startBanner(prop_item, topBanner, type)
         "trans": "#65a33e",
         "trig": "#7a6492",
         "promo": "#457a93",
-        "news": "#a77d3b"
+        "news": "#a77d3b",
+
       }
       var borderColor;
       // if (EMS) {
@@ -241,16 +242,21 @@ mixin startBanner(prop_item, topBanner, type)
         borderColor = (typeMap.hasOwnProperty(type)) ? typeMap[type] : typeMap.trans;
       // }
 
+      var leftWidth = (topBanner.leftWidth) ? topBanner.leftWidth  : '50%'
+      var rightWidth =  (topBanner.rightWidth) ? topBanner.rightWidth  : '50%'
+
+
+
   if topBanner
     //BANNER
     tr
       td.fluid
         table(width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; margin: 0 auto; table-layout: fixed; background-color: #ffffff;" )
           tr
-            td(align="right" valign="top" style="border-top: 6px solid #{borderColor};" width="50%")
+            td(align="right" valign="top" style="border-top: 6px solid #{borderColor};" width=leftWidth)
               a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank")
                 img(src="#{topBanner.left}", alt="FBS" style="border: none; display:block; height: auto; width: 100%;")
-            td(align="left" valign="top" style="border-top: 6px solid #{borderColor}; " width="50%")
+            td(align="left" valign="top" style="border-top: 6px solid #{borderColor};" width=rightWidth)
               a(href="#{'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'header', 'button', 'payments', prop_item.lang)}" target="_blank" title="Personal Area")
                 img(src="#{topBanner.right}", alt="Personal Area" style="border: none; display:block; height: auto; width: 100%;" )
 
@@ -287,7 +293,7 @@ mixin bg(img, attr)
     img.src = img.src || ''
     attr = attr || {}
   td(style="background: #{img.color} url(#{img.src}) center bottom no-repeat; padding-left:0; padding-right:0;")&attributes(attr)
-    <!--[if gte mso 9]>
+    |<!--[if gte mso 9]>
     | <v:rect style="width:#{(img.width || '600') + 'px'}; height:#{img.height + 'px' || ''};" strokecolor="none">
     |  <v:fill type="tile" color="#fff" src="#{img.src}" /></v:fill>
     | </v:rect>
