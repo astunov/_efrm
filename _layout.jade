@@ -10,6 +10,11 @@ html(lang="en" xmlns:v="urn:schemas-microsoft-com:vml")
 	body
 		center.wrapper
 			.webkit
-				block letter
-				if GR && IF
-					| {{ENDIF}}
+				| <!--[if (gte mso 9)|(IE)]><table width="600" align="center"><tr><td><![endif]-->
+				+table({"class":"outer", "align":"center"})
+					tr
+						td
+							block letter
+							if GR && IF
+								| {{ENDIF}}
+				| <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
