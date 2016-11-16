@@ -327,3 +327,18 @@ mixin footerBye(prop_item, item, align)
         tr
           td(valign="middle"): a(href="#{prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)}" style="font-size:0;" target="_blank"): img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3792.png", alt="" width="25" height="25" style="display:block;")
           td.footerBye__text(style="font-size: 10px;  color: #696969; padding-left:10px; padding-right:10px; font-family: Arial, sans-serif"): div !{item}
+
+mixin bullet
+  img(src="http://s.fbs.direct/custloads/761119851/2016/11_november/anons_new_site/bullet.png" width="15" height="15" alt="")
+
+mixin listItem(prop_item, item)
+  - var paddingDir = (prop_item.rtl) ? 'padding-left:' : 'padding-right:'
+  - var align = (prop_item.rtl) ? 'right': 'left';
+  tr
+    td(style="padding-bottom:10px;")
+      +table({"dir": (prop_item.rtl) ? 'rtl' : 'ltr'})
+        tr
+          td(style="#{paddingDir + '7px;'}" valign="middle" width="15")
+            +bullet
+          td.text.text--list(valign="middle" align=align): div
+            | !{item}
