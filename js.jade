@@ -4,7 +4,7 @@ include data-template
    * @func add utm nail to link
    */
   function utm(date, task, place, source, where, lang, sender) {
-    if (lang == undefined) {
+    if (!lang) {
       var lang = prop_item.lang;
     }
     if (GR) {
