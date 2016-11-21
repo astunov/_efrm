@@ -131,7 +131,7 @@ include data-template
       }
       dataOutput.push(itemInput);
     } else {
-      console.log('lang ' + itemInput.lang + ' doesn\'t have template');
+      // console.log('lang ' + itemInput.lang + ' doesn\'t have template');
     }
   });
 
@@ -201,3 +201,27 @@ include data-template
   var ta = queryData(['ta'], dataOutput);
   var my = queryData(['my'], dataOutput);
 
+
+
+  /**
+   * Add links to text
+   * param {string} data — string to be formatted
+   * param {...object} ...links — links, that show be added
+   * @property {string} href — attr to html <a> tag
+   * @property {string} text — text to html <a> tag
+   * Example for jade:
+   * - let textData = 'Our Support Team by e-mail at support@fbs.com or via live chat in the bottom right-hand corner on fbs.com';
+   * // Add only one link
+   * div !{addLink(textData, {href: '#', text: 'support@fbs.com'})}
+   * // Add multipy links
+   * div !{addLink(textData, {href: '#', text: 'support@fbs.com'}, {href: '#', text: 'fbs.com'})}
+   *
+   */
+  function addLink(data, ...links) {
+    links.forEach((link) => {
+      let formattedPhrase = ` <a class="link" target="_blank" href="${link.href}">${link.text}</a>`;
+      link.text = new RegExp('\\s' + link.text);
+      data = data.replace(link.text, formattedPhrase);
+    });
+    return data;
+  }
