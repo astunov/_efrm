@@ -342,7 +342,10 @@ mixin listItem(prop_item, item)
           td(style="#{paddingDir + '7px;'}" valign="middle" width="15")
             +bullet
           td.text.text--list(valign="middle" align=align): div
-            | !{item}
+            if item
+              | !{item}
+            else
+              block
 
 
 
@@ -364,6 +367,8 @@ mixin startBanner(prop_item, topBanner, type)
       var rightWidth =  (topBanner.rightWidth) ? topBanner.rightWidth  : '50%'
 
 
+    let topLink = topBanner.topLink || prop_item.site;
+    topLink += utm(date, task, 'header', 'logo', 'index', prop_item.lang);
 
   if topBanner
     +table
@@ -372,7 +377,7 @@ mixin startBanner(prop_item, topBanner, type)
           +table({"class": "top-banner"})
             tr
               td
-                a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank")
+                +a({href: topLink})
                   img(src="#{topBanner.top}", alt="")
       tr
         td.fluid

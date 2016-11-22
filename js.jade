@@ -220,7 +220,9 @@ include data-template
   function addLink(data, ...links) {
     links.forEach((link) => {
       let formattedPhrase = ` <a class="link" target="_blank" href="${link.href}">${link.text}</a>`;
-      link.text = new RegExp('\\s' + link.text);
+      // if (!link.space) {
+      //   link.text = new RegExp(`\\s${link.text}`)
+      // }
       data = data.replace(link.text, formattedPhrase);
     });
     return data;
