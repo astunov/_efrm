@@ -11,8 +11,9 @@ include data-template
       var utm = '?utm_source=fbs-gr360' +'&utm_medium=email&utm_content=news_' + date + '2016' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     } else if (EMS) {
       LETTERNAME = LETTERNAME || task ;
-      TYPE = TYPE || 'triger'
-      var utm = '?utm_source=fbs-eMS' +'&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + date + '2016' + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+      TYPE = TYPE || 'triger';
+      DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
+      var utm = '?utm_source=fbs-eMS' +'&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + DATE + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     }
     utm += ((lang === 'ru') || (lang === 'xx')) ?   '&lang=' + lang : '';
     // debug mode
@@ -76,9 +77,11 @@ include data-template
       var footerPaymentsUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
     } else if (EMS) {
       LETTERNAME = LETTERNAME || task ;
-      TYPE = TYPE || 'triger'
-      var footerIndexUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + date + '2016' + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
-      var footerPaymentsUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + date + '2016' + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
+      TYPE = TYPE || 'triger';
+      DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
+
+      var footerIndexUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' +DATE + 'footer_text_index&utm_campaign=' + lang + '_rtrg';
+      var footerPaymentsUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + DATE + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
     }
     footerIndexUtm += ((lang === 'ru') || (lang === 'my')) ?   '&lang=' + lang : '';
     footerPaymentsUtm += ((lang === 'ru') || (lang === 'my')) ?   '&lang=' + lang : '';
