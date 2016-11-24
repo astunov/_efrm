@@ -157,7 +157,7 @@ mixin loginAlter(prop_item, ems)
      td(align="right" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0;" width="50%")
       +a({href: prop_item.site + utm(date, task, 'footer', 'logo', 'index', prop_item.lang)})
         img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_left.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3944.png'}" alt="FBS" style="display:block; width: 100%; font-size:16px;")
-     td(align="left" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0; background-color: #70a839;" width="50%")
+     td(align="left" style="padding-left:0; padding-right: 0; padding-top: 0; padding-bottom: 0; font-size: 0;" width="50%")
       +a({href: 'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'footer', 'button', 'payments', prop_item.lang)})
         img(src="#{ ems ?  'http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_right.png' : 'http://multimedia.email.fbs.com/fbs/1/1/photos/3945.png'}" alt="Personal Area" style="display:block; width: 100%; color: #fff; background-color: #70A839;  font-size:16px;")
 
@@ -373,17 +373,17 @@ mixin startBanner(prop_item, topBanner, type)
   if topBanner
     +table
       tr
-        td.fluid(style="border-top: 6px solid #{borderColor};")
+        td.fluid(style="border-top: 6px solid #{borderColor}; background-color: green;")
           +table({"class": "top-banner"})
             tr
-              td
+              td(align="center")
                 +a({href: topLink})
-                  img(src="#{topBanner.top}", alt="")
+                  img(src="#{topBanner.top}" width="100%" alt="")
       tr
         td.fluid
           +table({"class": "top-banner"})
             tr
-              td(align="left" valign="top" width=leftWidth)
+              td(align="right" valign="top" width=leftWidth)
                 a(href="#{prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang)}" target="_blank")
                   img(src="#{topBanner.left}", alt="FBS")
               td.top-banner__btn(align="left" valign="top" width=rightWidth)
