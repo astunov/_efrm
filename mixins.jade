@@ -367,8 +367,7 @@ mixin startBanner(prop_item, topBanner, type)
       var rightWidth =  (topBanner.rightWidth) ? topBanner.rightWidth  : '50%'
 
 
-    let topLink = topBanner.topLink || prop_item.site;
-    topLink += utm(date, task, 'header', 'logo', 'index', prop_item.lang);
+    let topLink = topBanner.topLink || prop_item.site + utm(date, task, 'header', 'logo', 'index', prop_item.lang);
 
   if topBanner
     +table
