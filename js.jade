@@ -7,15 +7,21 @@ include data-template
     if (!lang) {
       var lang = prop_item.lang;
     }
+    var utm;
     if (GR) {
-      var utm = '?utm_source=fbs-gr360' +'&utm_medium=email&utm_content=news_' + date + '2016' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+      utm = '?utm_source=fbs-gr360' +'&utm_medium=email&utm_content=news_' + date + '2016' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     } else if (EMS) {
       LETTERNAME = LETTERNAME || task ;
       TYPE = TYPE || 'triger';
       DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
-      var utm = '?utm_source=fbs-eMS' +'&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + DATE + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+      utm = '?utm_source=fbs-eMS' +'&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + DATE + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+    } else if(MT) {
+      LETTERNAME = LETTERNAME || task ;
+      DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
+      TYPE = TYPE || 'promo';
+      utm = '?utm_source=email-MT' +'&utm_medium=email&utm_content=' + '_' + LETTERNAME + '_' + DATE + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     }
-    utm += ((lang === 'ru') || (lang === 'xx')) ?   '&lang=' + lang : '';
+    utm += ((lang === 'ru') || (lang === 'xx')) ? '&lang=' + lang : '';
     // debug mode
     // console.log(utm)
     return utm;

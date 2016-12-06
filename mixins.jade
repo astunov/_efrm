@@ -126,6 +126,14 @@ mixin footer2(prop_item)
     tr
       td(align="#{(prop_item.rtl) ? 'right' : 'left'}") !{replaceUtmInFooter(prop_item.footerSecond, date, prop_item.lang)}
 
+mixin footer3(prop_item)
+
+  +table({id: 'footerTable', dir: (prop_item.rtl) ? 'rtl' : 'ltr'})
+    tr
+      td: div You have subscribed to receive learning materials, which means you are serious about trading and will gain financial prosperity. We wish you productive training and profitable or successful trading.
+    tr
+      td: div If you have no desire to earn more on Forex, you may #[+a({href: 'http://suite11.emarsys.net/u/un.php?par=$uid$_$cid$_$llid$_$sid$', 'class': 'link'}) unsubscribe from the newsletter].
+
 
 mixin login(prop_item)
   table(width="600" cellpadding="0" cellspacing="0" border="0" align="center" id="loginTable" dir="#{(prop_item.rtl1) ? 'rtl' : 'ltr'}" style="background: #65a33e url(http://multimedia.email.fbs.com/fbs/1/1/photos/3667.jpg) no-repeat center center;")
