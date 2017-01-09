@@ -132,7 +132,7 @@ mixin footer3(prop_item)
     tr
       td: div You have subscribed to receive learning materials, which means you are serious about trading and will gain financial prosperity. We wish you productive training and profitable or successful trading.
     tr
-      td: div If you have no desire to earn more on Forex, you may #[+a({href: 'http://suite11.emarsys.net/u/un.php?par=$uid$_$cid$_$llid$_$sid$', 'class': 'link'}) unsubscribe from the newsletter].
+      td: div If you have no desire to earn more on Forex, you may #[+a({href: 'http://suite15.emarsys.net/u/un.php?par=$uid$_$cid$_$llid$_$sid$', 'class': 'link'}) unsubscribe from the newsletter].
 
 
 mixin login(prop_item)
@@ -267,7 +267,7 @@ mixin startBanner(prop_item, topBanner, type)
                 img(src="#{topBanner.left}", alt="FBS")
             td(align="left" valign="top" style="border-top: 6px solid #{borderColor};" width=rightWidth)
               a(href="#{'https://' + 'my.' + prop_item.site.spliceUrl() + '/payments' + utm(date, task, 'header', 'button', 'payments', prop_item.lang)}" target="_blank" title="Personal Area")
-                img(src="#{topBanner.right}", alt="Personal Area" )
+                img(src="#{topBanner.right}", alt="Personal Area")
 
 mixin ifelse(prop_item, index, prop)
   if GR
@@ -296,11 +296,11 @@ mixin a(attr)
 
 mixin bg(img, attr)
   -
-    img = img || ''
-    img.color = img.color || '#fff'
-    img.height = img.height || '200'
-    img.src = img.src || ''
-    attr = attr || {}
+    img = img || '';
+    img.color = img.color || '#fff';
+    img.height = img.height || '200';
+    img.src = img.src || '';
+    attr = attr || {};
   td(style="background: #{img.color} url(#{img.src}) center bottom no-repeat; padding-left:0; padding-right:0;")&attributes(attr)
     |<!--[if gte mso 9]>
     | <v:rect style="width:#{(img.width || '600') + 'px'}; height:#{img.height + 'px' || ''};" strokecolor="none">

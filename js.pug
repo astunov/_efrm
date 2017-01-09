@@ -9,15 +9,15 @@ include data-template
     }
     var utm;
     if (GR) {
-      utm = '?utm_source=fbs-gr360' +'&utm_medium=email&utm_content=news_' + date + '2017' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+      utm = '?utm_source=fbs-gr360' +'&utm_medium=email&utm_content=news_' + date + '2016' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     } else if (EMS) {
       LETTERNAME = LETTERNAME || task ;
       TYPE = TYPE || 'triger';
-      DATE = (TYPE === 'triger') ? '' : `${date}2017_`;
+      DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
       utm = '?utm_source=fbs-eMS' +'&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + DATE + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     } else if(MT) {
       LETTERNAME = LETTERNAME || task ;
-      DATE = (TYPE === 'triger') ? '' : `${date}2017_`;
+      DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
       TYPE = TYPE || 'promo';
       utm = '?utm_source=email-MT' +'&utm_medium=email&utm_content=' + '_' + LETTERNAME + '_' + DATE + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
     }
@@ -79,12 +79,12 @@ include data-template
    */
   function replaceUtmInFooter(data, date, lang) {
     if (GR) {
-      var footerIndexUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2017' + '_' + task + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
-      var footerPaymentsUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2017' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
+      var footerIndexUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
+      var footerPaymentsUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
     } else if (EMS) {
       LETTERNAME = LETTERNAME || task ;
       TYPE = TYPE || 'triger';
-      DATE = (TYPE === 'triger') ? '' : `${date}2017_`;
+      DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
 
       var footerIndexUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' +DATE + 'footer_text_index&utm_campaign=' + lang + '_rtrg';
       var footerPaymentsUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + DATE + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
@@ -96,7 +96,6 @@ include data-template
     formatedData = formatedData.replace('?utm_replace_payments', footerPaymentsUtm);
     if (EMS) {
       formatedData = formatedData.replace('[[remove]]', 'http://suite11.emarsys.net/u/un.php?par=$uid$_$cid$_$llid$_$sid$')
-      // formatedData = formatedData.replace('[[remove]]', 'http://e.fbs.news/u/un.php?par=$uid$_$cid$_$llid$_$sid$')
     }
     return formatedData;
   }
@@ -229,7 +228,7 @@ include data-template
    */
   function addLink(data, ...links) {
     links.forEach((link) => {
-      let formattedPhrase = `<a class="link" target="_blank" href="${link.href}">${link.text}</a>`;
+      let formattedPhrase = ` <a class="link" target="_blank" href="${link.href}">${link.text}</a>`;
       // if (!link.space) {
       //   link.text = new RegExp(`\\s${link.text}`)
       // }

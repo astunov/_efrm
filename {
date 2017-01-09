@@ -1,0 +1,43 @@
+{
+  type: ''
+  source: ''
+  medium: ''
+  content: ''
+  lang: ''
+}
+
+
+  '?utm_source=fbs-gr360'
+  &utm_medium=email
+  &utm_content=news_'
+  date'2016'
+  task
+  place
+  source
+  where
+  utm_campaign
+  lang
+
+
+
+  Data
+
+  Views
+
+
+  Тип
+    Поля
+    UTM
+
+{
+  type: 'Email'
+  source: ''
+  medium: ''
+  content: ''
+  utm: ...fields
+}
+
+
+Reduce функция, которая возвращает часть стейта
+~ 3
+

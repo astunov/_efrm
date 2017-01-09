@@ -1,0 +1,14 @@
+block vars
+//- TEMPLATE
+//- include ./js
+include ./mixins
+html(lang="en" xmlns:v="urn:schemas-microsoft-com:vml")
+	head
+		+head()
+	body
+		center.wrapper
+			.webkit(align="left" align="left")
+				| <!--[if (gte mso 9)|(IE)]> !{'<table width="' + letterMaxWidth + '" align="center"><tr><td>'} <![endif]-->
+				//- +table({"class":"outer", "align":"center"})
+				block letter
+				| <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
