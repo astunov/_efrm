@@ -1,0 +1,128 @@
+//- Head template
+mixin head
+  meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+  meta(http-equiv="X-UA-Compatible" content="IE=edge")
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  meta(meta name="format-detection" content="telephone=no")
+
+  link(rel="stylesheet", href="style/style.css")
+  style.
+    a[x-apple-data-detectors=true] {
+      color: inherit !important;
+      text-decoration: inherit !important;
+    }
+    *[x-apple-data-detectors=true] {
+      color: inherit !important;
+      text-decoration: inherit !important;
+    }
+    /* Windows Phone Viewport Fix */
+    @-ms-viewport {
+        width: device-width;
+    }
+    #outlook a
+    {
+        padding: 0;
+    }
+    v\:* { behavior: url(#default#VML); display: inline-block; }
+
+    @media (max-width:620px) {
+      .contentTb > tbody > tr > td:not(.fluid) {
+        padding-right: 20px !important;
+        padding-left: 20px !important;
+      }
+    }
+  |  <!--[if (gte mso 9)|(IE)]> <style type="text/css"> table {border-collapse: collapse;} </style> <![endif]-->
+
+mixin preheader(data)
+  +tb({'class': 'preheader'})
+    tr: td: div= data.preheader
+
+mixin loginAlter(data)
+  +tb({'class': 'login'})
+    td.login__logo(align="right" width="50%")
+      +a({href: data.site})
+        img(src="http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_left.png" alt="FBS")
+    td.login__btn(align="left" width="50%")
+      +a({href: data.site.my() + '/payments'})
+        img(src="http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_right.png" alt="Personal Area")
+
+//- Footer template
+mixin footer(data)
+  -
+    let footerSecond = data.footerSecond.change(
+      {
+        replace: 'utm_replace_index',
+        to: utm({place: 'footer', source: 'text', target: 'index'})
+      },
+      {
+        replace: '?utm_replace_payments',
+        to: utm({place: 'footer', source: 'text', target: 'payments'})
+      },
+      {
+        replace: '[[remove]]',
+        to: 'http://suite11.emarsys.net/u/un.php?par=$uid$_$cid$_$llid$_$sid$'
+      }
+    );
+  +tb({'class': 'footer'})
+    tr
+      td.footer__hr &nbsp;
+    +row
+      div !{ data.footerFirst } <br><br>
+    +row
+      div!= footerSecond
+
+//- TOPBANNER
+    Contains 3 pieces of picture to get
+    best perfomance in supported mail clients
+    ======
+    ==||==
+
+mixin startBanner(data, config, props)
+
+  -
+    //- Top border color map
+    const typeMap =
+      {
+        trans: '#65a33e',
+        triger: '#7a6492',
+        promo: '#457a93',
+        news: '#a77d3b'
+      };
+    // Declare default values
+
+    props = props || {};
+
+    props.leftWidth = props.leftWidth|| '300';
+    props.rightWidth = props.rightWidth || '300';
+    props.topHeight = props.topHeight || '165';
+    props.bottomHeight = props.bottomHeight || '92';
+
+    props.top = props.top || `${config.src}1_01.jpg`;
+    props.left = props.left || `${config.src}1_02.jpg`;
+    props.right = props.right || `${config.src}1_03.jpg`;
+
+    props.topLink = props.topLink || data.site;
+    props.leftLink = props.leftLink || data.site;
+    props.rightLink = props.rightLink || data.site;
+
+    props.borderColor = typeMap[config.type] || typeMap.promo;
+    if(typeMap[config.type] === undefined) { throw new Error("Enter correct option type from ['trans', 'triger', 'promo', 'news']" )}
+
+  +tb()
+    tr
+      td.fluid(style=`border-top: 6px solid ${props.borderColor}`)
+        +tb({'class': 'banner-top', dir: 'ltr'})
+          tr
+            td(align="center")
+              +a({href: props.topLink + utm({source: 'img', place: 'header', target: 'index'}) })
+                img(src=props.top width="600" alt=data.header height=props.topHeight)
+    tr
+      td.fluid
+        +tb({'class': 'banner-top', dir: 'ltr'})
+          tr
+            td.banner-top__small(align="right" valign="top" width=props.leftWidth)
+              +a({href: props.leftLink + utm({source: 'img', place: 'header', target: 'index'}) })
+                img(src=props.left, alt="FBS" height=props.bottomHeight)
+            td.banner-top__small.banner-top__btn(align="left" valign="top" width=props.rightWidth)
+              +a({href: props.rightLink + utm({source: 'img', place: 'header', target: 'personal'}) })
+                img(src=props.right, alt="Personal Area" height=props.bottomHeight)

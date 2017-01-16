@@ -1,0 +1,11 @@
+{
+  "extends": "google",
+  "installedESLint": true,
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "rules": {
+    "spaced-comment": ["error", "always", { "markers": ["!", "="] }]
+  }
+}

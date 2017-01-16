@@ -1,0 +1,186 @@
+//-
+//- BLOCKS
+//-
+
+//- Table tag
+mixin tb(props)
+  -
+   	props = props || {}
+    props.width = props.width || '100%';
+    props.align = props.align || 'center';
+    props.dir = props.dir || ((DATA.rtl) ? 'rtl' : false )
+
+  table(cellpadding="0" cellspacing="0" border="0")&attributes(props)
+    tbody
+      block
+-
+  /**
+    * @param {Object} props — css props
+    */
+mixin row(props)
+  tr: td.row(align=ALIGN)&attributes(props): block
+
+//- Link tag
+mixin a(props)
+  - props = props || {}
+  a(target='_blank')&attributes(props)
+    block
+
+//- TYPO
+mixin h1(props)
+  //- Defaults
+  -
+    props = props || {}
+    props.class = props.class || 'h1'
+    //- Template
+  +row(props)
+    div: block
+
+mixin h2(props)
+  //- Defaults
+  -
+    props = props || {};
+    props.class = props.class || 'h2';
+    // props.align = props.align || ((DATA.rtl) ? 'right' : 'left');
+  //- Template
+  +row(props)
+    div: block
+
+mixin text(props)
+  -
+    props = props || {};
+    props.class = props.class || 'text';
+  +row(props)
+    div: block
+
+mixin btn(props, styleWrapper, styleButton)
+  //- Defaults
+  -
+    styleWrapper = styleWrapper || {};
+    styleWrapper.class  = styleWrapper.class || 'btn__wrapper';
+    styleWrapper.style  = styleWrapper.style || 'padding-bottom:20px;';
+    styleWrapper.align = styleWrapper.align  || 'center';
+
+    styleButton = styleButton || {};
+    styleButton.class = styleButton.class || 'button'
+    styleButton.style = styleButton.style || 'margin:auto;';
+    styleButton.align = styleButton.align || 'center';
+
+    const btnInner = {'class': 'btn_inner', valign: 'middle', align: 'center'};
+  //- Template
+  +row(styleWrapper)
+    +tb(styleButton)
+      +row(btnInner)
+        div
+          +a({
+            href: props.link,
+            title: props.title,
+            'class': 'btn__link'
+          })
+            span!= props.title
+
+//- HR
+    Divides content blocks
+
+mixin hr(data)
+  +tb({'class': 'hr'})
+    tr
+      td: div &nbsp;
+
+//- BANNER
+    Simple adaptive by default one image block
+mixin banner(props)
+  -
+    props = props || {};
+    props.width = props.width || '100%';
+    props.link = '' || '';
+    props.src = '' || '';
+    props.style = props.style || 'padding-bottom: 0;'
+
+  tr
+    td.fluid(align="center" valign="top")
+      +a({href: props.link})
+        img(src=props.src style=props.style)
+
+//- OL
+    Ordered list (max 3)
+mixin ol(data)
+  +tb({'class': 'ol'})
+    each item, number in data
+      tr
+        td.ol__bullet(width="34" align="center" valign="top")
+          case number
+            when 0
+              img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3798.png" alt="1")
+            when 1
+              img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3799.png" alt="2" width="17" height="23")
+            when 2
+              img(src="http://multimedia.email.fbs.com/fbs/1/1/photos/3797.png" alt="3" width="17" height="23")
+        td.text(valign="middle"): div !{item}
+
+//- LI
+    Unordered list
+mixin bullet
+  img(src="http://s.fbs.direct/custloads/761119851/2016/11_november/anons_new_site/bullet.png" width="15" height="15" alt="")
+
+-
+  /**
+    * @param {Array} data — list of items to render
+    */
+mixin ul(data)
+  //- TODO RTL
+  +tb({'class': 'ul'})
+    each item in data
+      tr
+        td.ul__bullet(valign="middle" width="15")
+          +bullet
+        td.text.text--list(valign="middle" align=ALIGN): div
+          | !{item}
+
+-
+  /**
+    * @param {Object} data
+    * @property {String} data.auth
+    * @property {Array} data.content
+    */
+mixin quote(data)
+  +tb
+    +row({'class': 'quote__desc-title'})
+      div!= data.auth
+    +row
+      +tb
+        tr
+          td.quote__icon(valign="top")
+            img(src="http://s.fbs.direct/custloads/761119851/2016/09_september/EM-331_IDN-banks/news-t-shirt/D4r9x9V.png", alt="")
+          td.quote__desc
+            each item in data.content
+              +tb
+                tr
+                  td(style="padding-bottom: 10px;")
+                    div!= item
+
+//- refacor => more universal
+mixin two-col()
+  +tb
+    tr
+      td.two-column
+        | <!--[if (gte mso 9)|(IE)]><table width="100%"><tr><td width="50%" valign="top"><![endif]-->
+        +two-col-item({'class': 'column--img'})
+          +tb({"class":"contents"})
+            +row({align: 'center'})
+              img(src="http://s.fbs.direct/custloads/761119851/2016/11_november/FXempire/123_vanilla_165.jpg" width="165" height="165" alt="")
+        |<!--[if (gte mso 9)|(IE)]></td><td width="50%" valign="top"><![endif]-->
+        +two-col-item
+          +tb
+            +row({'class':'inner', style: 'padding: 0 10px;'})
+              .column
+                +tb({"class":"contents"})
+                  +h2(prop_item)
+                    | Lorem
+                  +text(prop_item)
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        |<!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+
+mixin two-col-item(props)
+  .column&attributes(props)
+    block

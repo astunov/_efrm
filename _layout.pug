@@ -1,14 +1,18 @@
 block vars
+-
+  const RTL = DATA.rtl ? 'rtl' : false
+  let ALIGN =  DATA.rtl ? 'right' : 'left'
 //- TEMPLATE
-//- include ./js
-include ./mixins
-html(lang="en" xmlns:v="urn:schemas-microsoft-com:vml")
-	head
-		+head()
-	body
-		center.wrapper
-			.webkit(align="left" align="left")
-				| <!--[if (gte mso 9)|(IE)]> !{'<table width="' + letterMaxWidth + '" align="center"><tr><td>'} <![endif]-->
-				//- +table({"class":"outer", "align":"center"})
-				block letter
-				| <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->
+include ./js
+include ./mixins/index
+
+html(lang="en" xmlns:v="urn:schemas-microsoft-com:vml" class=RTL dir=RTL)
+  head
+    +head()
+  body
+    center.wrapper
+      .webkit
+        | <!--[if (gte mso 9)|(IE)]> !{'<table width="' + CONFIG.letterMaxWidth + '" align="center"><tr><td>'} <![endif]-->
+        //- +table({"class":"outer", "align":"center"})
+        block letter
+        | <!--[if (gte mso 9)|(IE)]></td></tr></table><![endif]-->

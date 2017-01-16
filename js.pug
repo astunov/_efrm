@@ -1,238 +1,74 @@
-include data-template
 -
+  // Object.freeze(DATA);
+  // Object.freeze(CONFIG);
+
   /**
-   * @func add utm nail to link
+   * @func
+   * @param {string} props.place
+   * @param {string} props.source
+   * @param {target} props.target
+   * else @params are taken from global
+   * @return {string} utm
    */
-  function utm(date, task, place, source, where, lang, sender) {
-    if (!lang) {
-      var lang = prop_item.lang;
+  function utm(props) {
+    // utm places map
+    const uPlaces = {
+      header: 'header',
+      body: 'body',
+      footer: 'footer',
     }
-    var utm;
-    if (GR) {
-      utm = '?utm_source=fbs-gr360' +'&utm_medium=email&utm_content=news_' + date + '2016' + '_' + task + '_' + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
-    } else if (EMS) {
-      LETTERNAME = LETTERNAME || task ;
-      TYPE = TYPE || 'triger';
-      DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
-      utm = '?utm_source=fbs-eMS' +'&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + DATE + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
-    } else if(MT) {
-      LETTERNAME = LETTERNAME || task ;
-      DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
-      TYPE = TYPE || 'promo';
-      utm = '?utm_source=email-MT' +'&utm_medium=email&utm_content=' + '_' + LETTERNAME + '_' + DATE + place + '_' + source + '_' + where + '&utm_campaign=' + lang + '_rtrg';
+    Object.freeze(uPlaces);
+    // Defaults
+    props = props || {};
+    props.date = props.date || CONFIG.date;
+    props.date += '2017_';
+    props.task = props.task || CONFIG.task;
+    props.lang = props.lang || DATA.lang;
+    props.place = props.place || uPlaces.body;
+    props.source = props.source || 'button';
+    props.target = props.target || 'index';
+    props.type = CONFIG.type;
+    props.emailSouce = props.emailSouce || CONFIG.source.ems.utm;
+
+    if (props.type === 'triger') {
+      props.date = '';
     }
-    utm += ((lang === 'ru') || (lang === 'xx')) ? '&lang=' + lang : '';
-    // debug mode
-    // console.log(utm)
+    if(uPlaces[props.place] === undefined) { throw new Error("Enter correct option place from ['header', 'body', 'footer']" )}
+
+    let utm = `?utm_source=${props.emailSouce}&utm_medium=email&utm_content=${props.type}_${props.date}${props.task}_${props.place}_${props.target}&utm_campaign=${props.lang}_rtrg`;
+
     return utm;
   }
 
   /**
-   * @func replace spaces to non break spaces
-   */
-  String.prototype.replaceSpace = function () {
-    dataFormated = this.replace(/\s/g, '&nbsp;');
-    return dataFormated;
-  };
-
-  /**
-   * !!! DEPRECATED  !!!
    * @func get site.com instead income https://site.com
+   * @return {string} link to personal area
    */
-  String.prototype.spliceUrl = function () {
+  String.prototype.my = function() {
     var dataFormated = this.replace('https:\/\/', '');
     var patt = new RegExp('\/$');
     if (patt.test(dataFormated)) {
       dataFormated = dataFormated.replace(/\/$/, '');
     }
-    return dataFormated;
+    return "https://my." + dataFormated;
   };
 
   /**
-   * @func get site.com instead income https://site.com
+   * Replace text with another text or link
+   * @property {string} itemsToReplace.replace — this you want to replace
+   * @property {string} itemsToReplace.to — replace by this
+   * @property {string} itemsToReplace.link — link hreaf (if you want to add link)
+   * @return {string} data — formatted data
    */
-  String.prototype.my = function (link) {
-    link = link || ''
-    var dataFormated = this.replace('https:\/\/', '');
-    var patt = new RegExp('\/$');
-    if (patt.test(dataFormated)) {
-      dataFormated = dataFormated.replace(/\/$/, '');
-    }
-    return "https://my." + dataFormated + link;
-  };
 
-  /**
-   * @func good idea to break th endles words, but doesn't work
-   * because of lang issues
-   */
-  function addWordBreak(data, lang) {
-    if (lang === 'th') {
-        dataFormated = data.replace(/(.{30})/g,"$1&#8203;")
-        return dataFormated;
-    } else {
-        return data;
-    }
-  }
-
-  /**
-   * @func add utm to links in footer
-   */
-  function replaceUtmInFooter(data, date, lang) {
-    if (GR) {
-      var footerIndexUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_footer_text_index&utm_campaign=' + lang + '_rtrg';
-      var footerPaymentsUtm = '?utm_source=fbs-gr360&utm_medium=email&utm_content=promo_' + date + '2016' + '_' + task + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
-    } else if (EMS) {
-      LETTERNAME = LETTERNAME || task ;
-      TYPE = TYPE || 'triger';
-      DATE = (TYPE === 'triger') ? '' : `${date}2016_`;
-
-      var footerIndexUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' +DATE + 'footer_text_index&utm_campaign=' + lang + '_rtrg';
-      var footerPaymentsUtm = '?utm_source=fbs-eMS&utm_medium=email&utm_content=' + TYPE + '_' + LETTERNAME + '_' + DATE + '_footer_text_payments&utm_campaign=' + lang + '_rtrg';
-    }
-    footerIndexUtm += ((lang === 'ru') || (lang === 'my')) ?   '&lang=' + lang : '';
-    footerPaymentsUtm += ((lang === 'ru') || (lang === 'my')) ?   '&lang=' + lang : '';
-    var formatedData;
-    formatedData = data.replace('?utm_replace_index', footerIndexUtm);
-    formatedData = formatedData.replace('?utm_replace_payments', footerPaymentsUtm);
-    if (EMS) {
-      formatedData = formatedData.replace('[[remove]]', 'http://suite11.emarsys.net/u/un.php?par=$uid$_$cid$_$llid$_$sid$')
-    }
-    return formatedData;
-  }
-
-
-
-  /**
-   * @func add one link in to p of text
-   */
-  function addLinkToText(data, phrase, link) {
-    var formattedPhrase = '<a class="link" target="_blank" href="' + link + '">' + phrase + '</a>';
-    var formattedData = data.replace(phrase, formattedPhrase);
-    return formattedData;
-  }
-
-  /**
-   * @func capitalize First Letter
-   */
-   String.prototype.capitalizeFirstLetter = function() {
-       return this.charAt(0).toUpperCase() + this.slice(1);
-   }
-
-
-
-  /**
-   *
-   */
-  // var dataConst imported
-  // from data-template.jpde
-  var dataOutput = []
-  var itemMatched;
-
-  dataN.forEach(function(itemInput) {
-
-    itemMatched = dataConst.find(function(itemConst){
-      return itemConst.lang === itemInput.lang;
-    });
-
-    if(itemMatched) {
-      for(var key in itemMatched) {
-        itemInput[key]=itemMatched[key];
+  String.prototype.change = function(...itemsToReplace) {
+    var data = this.normalize();
+    itemsToReplace.forEach(item => {
+      if (item.link) {
+        item.to = `<a class="link" target="_blank" href="${item.link}">${item.replace}</a>`;
       }
-      dataOutput.push(itemInput);
-    } else {
-      // console.log('lang ' + itemInput.lang + ' doesn\'t have template');
-    }
-  });
-
-
-  /**
-  * @func query data
-  */
-  function queryData(arrToQueryWhat, arrToQueryFrom) {
-   var query = [];
-   var queriedItem;
-
-   arrToQueryWhat.forEach(function(what) {
-
-     queriedItem = arrToQueryFrom.find(function(item) {
-       return item.lang === what;
-     });
-     query.push(queriedItem);
-
-   });
-
-   return query;
-  }
-  /**
-  * @string current language combos
-  */
-  // GR COMBOS
-  var la_th =  queryData(['lo', 'th'], dataOutput);
-  var la_th_my =  queryData(['lo', 'th', 'my'], dataOutput);
-  var ar_ur_bn = queryData(['ar', 'ur', 'bn'], dataOutput);
-  var cn_jp_ko = queryData(['cn', 'jp', 'ko'], dataOutput);
-  var es_pt_en = queryData(['es', 'pt', 'en'], dataOutput);
-  var ta_vi_ms = queryData(['ta', 'vi', 'ms'], dataOutput);
-  var id_ms_en = queryData(['id', 'ms', 'en'], dataOutput);
-  var id_ru = queryData(['id', 'ru'], dataOutput);
-
-
-  var pt_en = queryData(['pt', 'en'], dataOutput);
-  var th_en = queryData(['th', 'en'], dataOutput);
-  var th_id_en = queryData(['th', 'id', 'en'], dataOutput);
-  var ms_en = queryData(['ms', 'en'], dataOutput);
-  var lo_th_en = queryData(['lo', 'th', 'en'], dataOutput);
-  var th_ms_en = queryData(['th', 'ms', 'en'], dataOutput);
-  var es_pt_en = queryData(['es', 'pt', 'en'], dataOutput);
-  var ar_en = queryData(['ar', 'en'], dataOutput);
-  var id_en = queryData(['id', 'en'], dataOutput);
-  var th_en = queryData(['th', 'en'], dataOutput);
-  var ar_id_ms_en = queryData(['ar', 'id', 'ms', 'en'], dataOutput);
-  var bn_en = queryData(['bn', 'en'], dataOutput);
-  var ur_en = queryData(['ur', 'en'], dataOutput);
-
-  // ELSE
-  var en = queryData(['en'], dataOutput);
-  var ar = queryData(['ar'], dataOutput);
-  var bn = queryData(['bn'], dataOutput);
-  var cn = queryData(['cn'], dataOutput);
-  var es = queryData(['es'], dataOutput);
-  var id = queryData(['id'], dataOutput);
-  var jp = queryData(['jp'], dataOutput);
-  var ko = queryData(['ko'], dataOutput);
-  var lo = queryData(['lo'], dataOutput);
-  var ms = queryData(['ms'], dataOutput);
-  var pt = queryData(['pt'], dataOutput);
-  var ru = queryData(['ru'], dataOutput);
-  var th = queryData(['th'], dataOutput);
-  var ur = queryData(['ur'], dataOutput);
-  var vi = queryData(['vi'], dataOutput);
-  var ta = queryData(['ta'], dataOutput);
-  var my = queryData(['my'], dataOutput);
-  var tr = queryData(['tr'], dataOutput);
-
-
-  /**
-   * Add links to text
-   * param {string} data — string to be formatted
-   * param {...object} ...links — links, that show be added
-   * @property {string} href — attr to html <a> tag
-   * @property {string} text — text to html <a> tag
-   * Example for jade:
-   * - let textData = 'Our Support Team by e-mail at support@fbs.com or via live chat in the bottom right-hand corner on fbs.com';
-   * // Add only one link
-   * div !{addLink(textData, {href: '#', text: 'support@fbs.com'})}
-   * // Add multipy links
-   * div !{addLink(textData, {href: '#', text: 'support@fbs.com'}, {href: '#', text: 'fbs.com'})}
-   *
-   */
-  function addLink(data, ...links) {
-    links.forEach((link) => {
-      let formattedPhrase = ` <a class="link" target="_blank" href="${link.href}">${link.text}</a>`;
-      // if (!link.space) {
-      //   link.text = new RegExp(`\\s${link.text}`)
-      // }
-      data = data.replace(link.text, formattedPhrase);
-    });
+      if (!item.replace && (!item.to || !item.link )) { throw new Error("ERROR \n enter correct args: \n @property {string} replace \n @property {string} to \n Example: {replace: 'abc', to: 'bca'} OR {replace: 'abc', link: 'https://yandex.com'}"); }
+        data = data.replace(item.replace, item.to);
+    })
     return data;
   }
