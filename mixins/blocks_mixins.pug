@@ -98,7 +98,7 @@ mixin banner(props)
     props.style = props.style || 'padding-bottom: 0;'
 
   tr
-    td.fluid(align="center" valign="top")
+    td.fluid.img-responsive(align="center" valign="top")
       +a({href: props.link})
         img(src=props.src style=props.style)
 

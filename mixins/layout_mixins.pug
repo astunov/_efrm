@@ -1,7 +1,9 @@
 //- Head template
 mixin head
   meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+  | <!--[if !mso]><!-->
   meta(http-equiv="X-UA-Compatible" content="IE=edge")
+  | <!--<![endif]-->
   meta(name="viewport" content="width=device-width, initial-scale=1")
   meta(meta name="format-detection" content="telephone=no")
 
@@ -39,12 +41,13 @@ mixin preheader(data)
 
 mixin loginAlter(data)
   +tb({'class': 'login'})
-    td.login__logo(align="right" width="50%")
-      +a({href: data.site})
-        img(src="http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_left.png" alt="FBS")
-    td.login__btn(align="left" width="50%")
-      +a({href: data.site.my() + '/payments'})
-        img(src="http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_right.png" alt="Personal Area")
+    tr
+      td.login__logo(align="right" width="50%" valign="top")
+        +a({href: data.site + utm({source: 'img', place: 'footer', target: 'index'}) })
+          img(src="http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_left.png" alt="FBS")
+      td.login__btn(align="left" width="50%" valign="top")
+        +a({href: data.site.my() + '/payments'  + utm({source: 'img', place: 'footer', target: 'payments'}) })
+          img(src="http://s.fbs.direct/custloads/761680031/2016/01_TRIGER/BONUS_888/login_right.png" alt="Personal Area")
 
 //- Footer template
 mixin footer(data)
@@ -94,7 +97,7 @@ mixin startBanner(data, config, props)
 
     props.leftWidth = props.leftWidth|| '300';
     props.rightWidth = props.rightWidth || '300';
-    props.topHeight = props.topHeight || '165';
+    props.topHeight = props.topHeight || '';
     props.bottomHeight = props.bottomHeight || '92';
 
     props.top = props.top || `${config.src}1_01.jpg`;
@@ -108,21 +111,18 @@ mixin startBanner(data, config, props)
     props.borderColor = typeMap[config.type] || typeMap.promo;
     if(typeMap[config.type] === undefined) { throw new Error("Enter correct option type from ['trans', 'triger', 'promo', 'news']" )}
 
-  +tb()
+  +tb({ 'class': 'banner-top'})
     tr
-      td.fluid(style=`border-top: 6px solid ${props.borderColor}`)
-        +tb({'class': 'banner-top', dir: 'ltr'})
-          tr
-            td(align="center")
-              +a({href: props.topLink + utm({source: 'img', place: 'header', target: 'index'}) })
-                img(src=props.top width="600" alt=data.header height=props.topHeight)
+      td.fluid.img-responsive
+        +a({href: props.topLink + utm({source: 'img', place: 'header', target: 'index'}) })
+          img(src=props.top width="600" alt=data.header)
     tr
       td.fluid
-        +tb({'class': 'banner-top', dir: 'ltr'})
+        +tb({dir: 'ltr'})
           tr
-            td.banner-top__small(align="right" valign="top" width=props.leftWidth)
+            td.banner-top__small(width="50%" align="right" valign="top")
               +a({href: props.leftLink + utm({source: 'img', place: 'header', target: 'index'}) })
-                img(src=props.left, alt="FBS" height=props.bottomHeight)
-            td.banner-top__small.banner-top__btn(align="left" valign="top" width=props.rightWidth)
-              +a({href: props.rightLink + utm({source: 'img', place: 'header', target: 'personal'}) })
-                img(src=props.right, alt="Personal Area" height=props.bottomHeight)
+                img(banner-top src=props.left, alt="FBS" )
+            td.banner-top__small.banner-top__btn(width="50%" align="left" valign="top")
+              +a({href: props.rightLink + utm({source: 'img', place: 'header', target: 'payments'}) })
+                img(width=props.rightWidth src=props.right, alt="Personal Area")
