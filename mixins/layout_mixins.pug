@@ -115,7 +115,7 @@ mixin startBanner(data, config, props)
     tr
       td.fluid.img-responsive
         +a({href: props.topLink + utm({source: 'img', place: 'header', target: 'index'}) })
-          img(src=props.top width="600" alt=data.header)
+          img(src=props.top width="600" alt=data.header style="text-align:center; font-size: 24px;")
     tr
       td.fluid
         +tb({dir: 'ltr'})
