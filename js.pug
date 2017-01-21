@@ -35,7 +35,7 @@
     }
     if(uPlaces[props.place] === undefined) { throw new Error("Enter correct option place from ['header', 'body', 'footer']" )}
 
-    let utm = `?utm_source=${props.emailSouce}&utm_medium=email&utm_content=${props.type}_${props.date}${props.task}_${props.place}_${props.target}&utm_campaign=${props.lang}_rtrg`;
+    let utm = `?utm_source=${props.emailSouce}&utm_medium=email&utm_content=${props.type}_${props.date}${props.task}_${props.place}_${props.source}_${props.target}&utm_campaign=${props.lang}_rtrg`;
 
     return utm;
   }
