@@ -54,11 +54,11 @@ mixin footer(data)
   -
     let footerSecond = data.footerSecond.change(
       {
-        replace: 'utm_replace_index',
+        replace: /\?utm_replace_index/,
         to: utm({place: 'footer', source: 'text', target: 'index'})
       },
       {
-        replace: '?utm_replace_payments',
+        replace: /\?utm_replace_payments/,
         to: utm({place: 'footer', source: 'text', target: 'payments'})
       },
       {
