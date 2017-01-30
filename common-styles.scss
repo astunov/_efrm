@@ -44,6 +44,11 @@ b {
     color: #000;
 }
 
+div {
+  word-wrap:break-word;
+  hyphens: auto;
+}
+
 .wrapper
 {
     width: 100%;

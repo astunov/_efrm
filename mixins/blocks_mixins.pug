@@ -74,7 +74,7 @@ mixin btn(props, styleWrapper, styleButton)
         div
           +a({
             href: props.link,
-            title: props.title,
+            title: props.title.replace(/<br>|&#8203;/g, ''),
             'class': 'btn__link'
           })
             span!= props.title
@@ -93,8 +93,8 @@ mixin banner(props)
   -
     props = props || {};
     props.width = props.width || '100%';
-    props.link = '' || '';
-    props.src = '' || '';
+    props.link = props.link || '';
+    props.src = props.src || '';
     props.style = props.style || 'padding-bottom: 0;'
 
   tr

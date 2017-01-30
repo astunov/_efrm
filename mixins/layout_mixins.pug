@@ -1,5 +1,7 @@
 //- Head template
-mixin head
+mixin head(data)
+  -
+    const charset = 'Unicode 3.0'
   meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
   | <!--[if !mso]><!-->
   meta(http-equiv="X-UA-Compatible" content="IE=edge")
@@ -34,13 +36,16 @@ mixin head
       }
     }
   |  <!--[if (gte mso 9)|(IE)]> <style type="text/css"> table {border-collapse: collapse;} </style> <![endif]-->
+  if data.lang === 'my' || 'th' || 'lo'
+    style.
+      div { word-break: break-all; }
 
 mixin preheader(data)
   +tb({'class': 'preheader'})
     tr: td: div= data.preheader
 
 mixin loginAlter(data)
-  +tb({'class': 'login'})
+  +tb({'class': 'login', dir: 'ltr'})
     tr
       td.login__logo(align="right" width="50%" valign="top")
         +a({href: data.site + utm({source: 'img', place: 'footer', target: 'index'}) })
