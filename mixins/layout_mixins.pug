@@ -36,9 +36,9 @@ mixin head(data)
       }
     }
   |  <!--[if (gte mso 9)|(IE)]> <style type="text/css"> table {border-collapse: collapse;} </style> <![endif]-->
-  if data.lang === 'my' || 'th' || 'lo'
+  if data.lang === 'my' || data.lang === 'th' || data.lang === 'lo'
     style.
-      div { word-break: break-all; }
+      div { word-wrap:break-word; /* word-break: break-all; */ -webkit-hyphens: auto;  -ms-hyphens: auto; hyphens: auto;}
 
 mixin preheader(data)
   +tb({'class': 'preheader'})
