@@ -64,11 +64,18 @@
   String.prototype.change = function(...itemsToReplace) {
     var data = this.normalize();
     itemsToReplace.forEach(item => {
-      if (item.link) {
+      if (item.link && !item.to) {
         item.to = `<a class="link" target="_blank" href="${item.link}">${item.replace}</a>`;
+      } else if (item.link && item.to) {
+        item.to = `<a class="link" target="_blank" href="${item.link}">${item.to}</a>`;
       }
-      if (!item.replace && (!item.to || !item.link )) { throw new Error("ERROR \n enter correct args: \n @property {string} replace \n @property {string} to \n Example: {replace: 'abc', to: 'bca'} OR {replace: 'abc', link: 'https://yandex.com'}"); }
-        data = data.replace(item.replace, item.to);
+      if (item.flag) {
+        item.replace = new RegExp(item.replace, item.flag)
+      }
+      // if (!item.replace && (!item.to || !item.link )) {
+      //   throw new Error("ERROR \n enter correct args: \n @property {string} replace \n @property {string} to \n Example: {replace: 'abc', to: 'bca'} OR {replace: 'abc', link: 'https://yandex.com'}");
+      // }
+      data = data.replace(item.replace, item.to);
     })
     return data;
   }
