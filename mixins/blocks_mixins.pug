@@ -5,10 +5,11 @@
 //- Table tag
 mixin tb(props)
   -
-   	props = props || {}
-    props.width = props.width || '100%';
-    props.align = props.align || 'center';
-    props.dir = props.dir || ((DATA.rtl) ? 'rtl' : false )
+    props = Object.assign({
+      width: '100%',
+      align: 'center',
+      dir: (DATA.rtl) ? 'rtl' : false
+    }, props)
 
   table(cellpadding="0" cellspacing="0" border="0")&attributes(props)
     tbody
@@ -22,34 +23,39 @@ mixin row(props)
 
 //- Link tag
 mixin a(props)
-  - props = props || {}
+  -
+    props = Object.assign({
+      width: '100%',
+      align: 'center',
+      dir: (DATA.rtl) ? 'rtl' : false
+    }, props)
   a(target='_blank')&attributes(props)
     block
 
 //- TYPO
 mixin h1(props)
-  //- Defaults
   -
-    props = props || {}
-    props.class = props.class || 'h1'
+    props = Object.assign({
+      'class': 'h1'
+    }, props)
     //- Template
   +row(props)
     div: block
 
 mixin h2(props)
-  //- Defaults
   -
-    props = props || {};
-    props.class = props.class || 'h2';
-    // props.align = props.align || ((DATA.rtl) ? 'right' : 'left');
+    props = Object.assign({
+      'class': 'h2'
+    }, props)
   //- Template
   +row(props)
     div: block
 
 mixin text(props)
-  -
-    props = props || {};
-    props.class = props.class || 'text';
+-
+  props = Object.assign({
+    'class': 'text'
+  }, props)
   +row(props)
     div: block
 
@@ -91,16 +97,17 @@ mixin hr(data)
     Simple adaptive by default one image block
 mixin banner(props)
   -
-    props = props || {};
-    props.width = props.width || '100%';
-    props.link = props.link || '';
-    props.src = props.src || '';
-    props.style = props.style || 'padding-bottom: 0;'
-
+    props = Object.assign({
+      width: '100%',
+      link: '',
+      src: '',
+      style: 'padding-bottom: 0;'
+      alt: ''
+    }, props)
   tr
     td.fluid.img-responsive(align="center" valign="top")
       +a({href: props.link})
-        img(src=props.src style=props.style)
+        img(src=props.src style=props.style alt=alt)
 
 //- OL
     Ordered list (max 3)
