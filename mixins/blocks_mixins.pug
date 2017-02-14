@@ -52,10 +52,10 @@ mixin h2(props)
     div: block
 
 mixin text(props)
--
-  props = Object.assign({
-    'class': 'text'
-  }, props)
+  -
+    props = Object.assign({
+      'class': 'text'
+    }, props)
   +row(props)
     div: block
 
