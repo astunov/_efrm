@@ -152,8 +152,9 @@ mixin ul(data)
     */
 mixin quote(data)
   +tb
-    +row({'class': 'quote__desc-title'})
-      div!= data.auth
+    if data.auth
+      +row({'class': 'quote__desc-title'})
+        div!= data.auth
     +row
       +tb
         tr
