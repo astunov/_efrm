@@ -116,7 +116,7 @@ mixin startBanner(data, config, props)
     props.rightLink = props.rightLink || data.site;
 
     props.borderColor = typeMap[config.type] || typeMap.promo;
-    if(typeMap[config.type] === undefined) { throw new Error("Enter correct option type from ['trans', 'triger', 'promo', 'news']" )}
+    // if(typeMap[config.type] === undefined) { throw new Error("Enter correct option type from ['trans', 'triger', 'promo', 'news']" )}
 
   +tb({ 'class': 'banner-top'})
     tr
