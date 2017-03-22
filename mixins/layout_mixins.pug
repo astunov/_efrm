@@ -111,17 +111,17 @@ mixin startBanner(data, config, props)
     props.left = props.left || `${config.src}1_02.jpg`;
     props.right = props.right || `${config.src}1_03.jpg`;
 
-    props.topLink = props.topLink || data.site;
+    props.topLink = props.topLink || data.site + utm({source: 'img', place: 'header', target: 'index'});
     props.leftLink = props.leftLink || data.site;
-    props.rightLink = props.rightLink || data.site;
+    props.rightLink = props.rightLink || data.site.my();
 
-    props.borderColor = typeMap[config.type] || typeMap.promo;
+    props.borderColor = props.borderColor || typeMap[config.type] || typeMap.promo;
     // if(typeMap[config.type] === undefined) { throw new Error("Enter correct option type from ['trans', 'triger', 'promo', 'news']" )}
 
-  +tb({ 'class': 'banner-top'})
+  +tb({ 'class': 'banner-top', width: '600'})
     tr
       td.fluid.img-responsive(style=`border-top: 6px solid ${props.borderColor}`)
-        +a({href: props.topLink + utm({source: 'img', place: 'header', target: 'index'}) })
+        +a({href: props.topLink })
           img(src=props.top width="600" alt=data.header style="text-align:center; font-size: 24px;")
     tr
       td.fluid

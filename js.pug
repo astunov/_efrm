@@ -22,20 +22,21 @@
     props = props || {};
     props.date = props.date || CONFIG.date;
     props.date += '2017_';
+    // props.date = CONFIG.dateFlag ? props.date : '';
     props.task = props.task || CONFIG.task;
     props.lang = props.lang || DATA.lang;
     props.place = props.place || uPlaces.body;
     props.source = props.source || 'button';
     props.target = props.target || 'index';
     props.type = CONFIG.type;
-    props.emailSouce = props.emailSouce || CONFIG.source.ems.utm;
+    props.emailSource = props.emailSource || CONFIG.source.ems.utm;
 
     if (props.type === 'triger') {
       props.date = '';
     }
     if(uPlaces[props.place] === undefined) { throw new Error("Enter correct option place from ['header', 'body', 'footer']" )}
 
-    let utm = `?utm_source=${props.emailSouce}&utm_medium=email&utm_content=${props.type}_${props.date}${props.task}_${props.place}_${props.source}_${props.target}&utm_campaign=${props.lang}_rtrg`;
+    let utm = `?utm_source=${props.emailSource}&utm_medium=email&utm_content=${props.type}_${props.date}${props.task}_${props.place}_${props.source}_${props.target}&utm_campaign=${props.lang}_rtrg`;
 
     return utm;
   }
@@ -78,4 +79,13 @@
       data = data.replace(item.replace, item.to);
     })
     return data;
+  }
+
+  /**
+   * Replace relative link path to UTM target
+   * example '/promo/lol/what' => 'promo-lol-what'
+   * @return {string} correct UTM target
+   */
+  String.prototype.utmTgNormalize = function() {
+    return this.slice(1).split('/').join('-');
   }

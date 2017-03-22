@@ -80,7 +80,7 @@ mixin btn(props, styleWrapper, styleButton)
         div
           +a({
             href: props.link,
-            title: props.title.replace(/<br>|&#8203;/g, ''),
+            title: props.title ? props.title.replace(/<br>|&#8203;/g, '') : '',
             'class': 'btn__link'
           })
             span!= props.title
@@ -95,7 +95,7 @@ mixin hr(data)
 
 //- BANNER
     Simple adaptive by default one image block
-mixin banner(props)
+mixin banner(props, tdProps)
   -
     props = Object.assign({
       width: '100%',
@@ -105,7 +105,7 @@ mixin banner(props)
       alt: ''
     }, props)
   tr
-    td.fluid.img-responsive(align="center" valign="top")
+    td.fluid.img-responsive(align="center" valign="top")&attributes(tdProps)
       +a({href: props.link})
         img(src=props.src style=props.style alt=alt)
 
@@ -141,6 +141,20 @@ mixin ul(data)
       tr
         td.ul__bullet(valign="middle" width="15")
           +bullet
+        td.text.text--list(valign="middle" align=ALIGN): div
+          | !{item}
+
+-
+  /**
+    * @param {Array} data — list of items to render
+    */
+mixin ulHo(data)
+  //- TODO RTL
+  +tb({'class': 'ul'})
+    each item in data
+      tr
+        td.ul__bullet(valign="top" width="15" style="padding-top: 3px;")
+          span(style="color: #ef3830;") &bull;
         td.text.text--list(valign="middle" align=ALIGN): div
           | !{item}
 
