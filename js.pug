@@ -31,7 +31,7 @@
     props.type = CONFIG.type;
     props.emailSource = props.emailSource || CONFIG.source.ems.utm;
 
-    if (props.type === 'triger') {
+    if (props.type === 'triger' || props.type === 'mercedes') {
       props.date = '';
     }
     if(uPlaces[props.place] === undefined) { throw new Error("Enter correct option place from ['header', 'body', 'footer']" )}
